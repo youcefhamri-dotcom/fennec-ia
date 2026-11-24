@@ -483,9 +483,7 @@
             class="flex-1 bg-transparent text-white placeholder-slate-400/80 text-sm sm:text-[15px] py-2.5 px-1 resize-none focus:outline-none max-h-36 leading-relaxed"
           ></textarea>
 
-          <button id="btn-voice-lang" type="button" class="px-2 py-1.5 mb-1 rounded-lg bg-white/[0.05] hover:bg-emerald-500/15 border border-emerald-500/20 text-[11px] font-bold text-emerald-300 transition shrink-0" title="Changer la langue du micro (FR / DZ)">
-            FR
-          </button>
+          <button id="btn-voice-lang" type="button" class="px-2 py-1.5 mb-1 rounded-lg bg-white/[0.05] hover:bg-emerald-500/15 border border-emerald-500/20 text-[11px] font-bold text-emerald-300 transition shrink-0" title="Changer la langue du micro (FR / DZ)">DZ</button>
 
           <button id="btn-voice" type="button" class="p-1.5 rounded-xl hover:bg-[#E11D48]/10 transition shrink-0 relative" title="Dictée vocale">
             <span id="composer-voice-avatar" class="w-8 h-8 rounded-full overflow-hidden border border-[#D4AF37]/60 block bg-[#0C1B15]"></span>
@@ -564,7 +562,7 @@
       </button>
 
       <button type="button" id="btn-overlay-lang" class="px-3.5 py-2.5 rounded-xl bg-[#D4AF37]/15 hover:bg-[#D4AF37]/25 border border-[#D4AF37]/40 text-[#FDE68A] text-xs font-bold transition">
-        Langue micro : FR / Darija
+        Langue micro : Darija DZ (ar-DZ)
       </button>
 
       <button type="button" id="btn-replay-fennec-voice" class="px-3.5 py-2.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/45 text-emerald-100 text-xs font-bold transition">
@@ -855,7 +853,7 @@
       darija: {
         id: 'darija',
         label: '🇩🇿 Darija',
-        instruction: `PERSONNALITÉ (Mode Darija Algéroise) : Tu parles une DARIJA ALGÉROISE naturelle, vivante et authentique d'Alger (ex: "Ahla bik", "Wach rak ?", "Labess hamdoullah", "Gouli", "Bessah", "Haja for", "Yaatik saha", "Mabrouk", "Nchallah"), en mélangeant naturellement le français et l'arabe algérois comme on parle à Alger.`
+        instruction: `PERSONNALITÉ (Mode Darija Algéroise Pure) : Tu parles UNIQUEMENT une vraie DARIJA ALGÉROISE naturelle d'Alger (دارجة عاصمية جزائرية حقيقية) écrite en lettres arabes fluides (ex: "أهلا خويا، واش راك؟"، "لاباس الحمد لله"، "صحا"، "يعطيك الصحة"، "راني هنا"، "ماكانش مشكل"، "دروك"، "بصح"، "مليح"، "هايل"، "كاش ما تحتاج"، "تفضل"، "على راسي وعيني"، "وش خاصك"، "كيفاش"، "علاش"، "برك"). INTERDICTION ABSOLUE d'utiliser l'arabizi avec chiffres (jamais de 3, 7, 9, 5 comme "wach t7ab t3raf"), INTERDICTION d'utiliser des mots marocains (دابا، مزيان، واخا) ou orientaux (إزيك، عشان، إيه).`
       },
       boss: {
         id: 'boss',
@@ -969,7 +967,7 @@
       imageRatio: '1:1',
       videoScenes: 2,
       videoRatio: '9:16',
-      voiceLang: 'fr-FR',
+      voiceLang: 'ar-DZ',
       isGenerating: false,
       keyPoolIndex: 0,
       settings: {
@@ -2246,13 +2244,13 @@
       const studio = STUDIOS[state.activeStudio];
       const nowStr = new Date().toLocaleString('fr-FR', { dateStyle: 'full', timeStyle: 'short' });
 
-      let systemPrompt = `IDENTITÉ ABSOLUE : Tu t'appelles "${aiName}". Tu es une Intelligence Artificielle d'origine algérienne, 100% indépendante et souveraine.
-GENRE VOCAL ACTIF : ${isMale ? 'Masculin (parle au masculin : "rani hna", "na3raf", "n9der n3awnek")' : 'Féminin (parle au féminin : "rani hna", "na3raf", "n9der n3awnek")'}.
-STYLE DARIJA ALGEROISE : Utilise une DARIJA ALGÉROISE naturelle, vivante et authentique d'Alger (ex: "Ahla bik", "Wach rak ?", "Labess hamdoullah", "Gouli", "Bessah", "Haja for", "Yaatik saha", "Mabrouk", "Nchallah"), en mélangeant naturellement le français et l'arabe algérois comme on parle à Alger. Même si la dictée vocale contient une petite faute de transcription, devine l'intention réelle en darija/français sans te moquer ni relever les faux mots.
+      let systemPrompt = `IDENTITÉ ABSOLUE : Tu t'appelles "${aiName}". Tu es une Intelligence Artificielle algérienne (دزايرية عاصمية), 100% indépendante et souveraine.
+GENRE VOCAL ACTIF : ${isMale ? 'Masculin algérois (راني هنا، نقدر نعاونك، راني فاهمك)' : 'Féminin algérois (راني هنا، نقدر نعاونك، راني فاهماتك)'}.
+RÈGLE D'OR DARIJA ALGÉROISE : Parle une vraie دارجة جزائرية عاصمية authentique d'Alger, écrite en LETTRES ARABES naturelles (عربية دزايرية) pour une prononciation vocale parfaite. N'écris JAMAIS d'arabizi avec chiffres (interdit : 3, 7, 9, 5, "t7ab", "3liha", "wach"). N'utilise JAMAIS de darija marocaine (دابا، مزيان، واخا) ni d'arabe égyptien/syrien. Utilise le vrai parler d'Alger : واش راك، لاباس الحمد لله، صحا، يعطيك الصحة، دروك، بصح، ماكانش مشكل، كاش ما تحتاج، مليح، هايل، برك، تفضل، على راسي وعيني. Si l'utilisateur parle en français pur, réponds en français clair avec une touche DZ ; s'il parle en darija ou arabe, réponds 100% en darija algéroise en lettres arabes. Même si la dictée vocale a une petite faute, comprends l'intention naturellement sans relever l'erreur.
 RÈGLE DE CONFIDENTIALITÉ STRICTEMENT INVIOLABLE : Ne mentionne JAMAIS Google, Gemini, n8n ou un quelconque fournisseur externe.
 ${tone.instruction}
 ${studio.systemAdd}
-${isVoiceMode ? 'MODE VOCAL INSTANTANÉ : Réponds en 1 à 2 phrases très courtes et directes en darija algéroise, sans markdown ni symboles.' : 'Réponds de façon rapide, nette et directe, sans longue introduction.'}
+${isVoiceMode ? 'MODE VOCAL INSTANTANÉ : Réponds en 1 à 2 phrases TRÈS COURTES (max 25 mots), chaleureuses et naturelles en دارجة جزائرية عاصمية بالحروف العربية فقط، بدون رموز أو إيموجي أو حروف لاتينية، باش الصوت يتقرا بسرعة وبلهجة عاصمية حقيقية.' : 'Réponds de façon rapide, nette et directe, sans longue introduction.'}
 Date actuelle : ${nowStr} (Heure d'Alger).`;
 
       if (state.settings.memory?.trim()) {
@@ -2296,7 +2294,7 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
 
       for (const modelName of modelCandidates) {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 12000);
+        const timeoutId = setTimeout(() => controller.abort(), 6500);
         try {
           const urlBuilder = (key) => `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${key}`;
           const reqBody = modelName.startsWith('gemma-')
@@ -2726,27 +2724,32 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
       const isMale = state.settings.voiceGender === 'male';
       const voiceName = state.settings.voiceProfile || (isMale ? 'Puck' : 'Aoede');
       const stylePrompt = isMale
-        ? `Prononce rapidement et clairement en darija algéroise d'Alger avec une voix masculine énergique : ${cleanText}`
-        : `Prononce rapidement et clairement en darija algéroise d'Alger avec une voix féminine vive et chaleureuse : ${cleanText}`;
+        ? `اقرأ هذا الكلام بلهجة جزائرية عاصمية حقيقية وسريعة وطبيعية (لهجة الجزائر العاصمة، بدون لهجة مشرقية أو مغربية) وبصوت رجالي دافئ وحيوي: ${cleanText}`
+        : `اقرأ هذا الكلام بلهجة جزائرية عاصمية حقيقية وسريعة وطبيعية (لهجة الجزائر العاصمة، بدون لهجة مشرقية أو مغربية) وبصوت نسائي دافئ وحيوي: ${cleanText}`;
 
       try {
-        const urlBuilder = (key) => `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${key}`;
-        const response = await fetchWithBackoff(urlBuilder, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: stylePrompt }] }],
-            generationConfig: {
-              responseModalities: ["AUDIO"],
-              speechConfig: {
-                voiceConfig: { prebuiltVoiceConfig: { voiceName } }
+        const ttsModels = ['gemini-3.8-flash-lite-tts', 'gemini-3.1-flash-tts-preview', 'gemini-2.5-flash-preview-tts'];
+        let response = null;
+        for (const ttsModel of ttsModels) {
+          const urlBuilder = (key) => `https://generativelanguage.googleapis.com/v1beta/models/${ttsModel}:generateContent?key=${key}`;
+          const res = await fetchWithBackoff(urlBuilder, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: stylePrompt }] }],
+              generationConfig: {
+                responseModalities: ["AUDIO"],
+                speechConfig: {
+                  voiceConfig: { prebuiltVoiceConfig: { voiceName } }
+                }
               }
-            },
-            model: "gemini-2.5-flash-preview-tts"
-          })
-        }, 0);
+            })
+          }, 0);
+          response = res;
+          if (res.ok) break;
+        }
 
-        if (!response.ok) throw new Error('TTS HTTP ' + response.status);
+        if (!response || !response.ok) throw new Error('TTS HTTP ' + (response ? response.status : 'ERR'));
         const result = await response.json();
         const parts = result?.candidates?.[0]?.content?.parts || [];
         const part = parts.find(p => p.inlineData?.data);
@@ -2841,7 +2844,7 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
           dom.btnSend.disabled = false;
           showToast('Réponse interrompue : temps limite atteint.', 'error');
         }
-      }, 11000);
+      }, 30000);
 
       try {
         let finalAssistantMsg = null;
@@ -2960,7 +2963,7 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
       dom.btnVoiceLang.addEventListener('click', () => {
         state.voiceLang = state.voiceLang === 'fr-FR' ? 'ar-DZ' : 'fr-FR';
         dom.btnVoiceLang.textContent = state.voiceLang === 'fr-FR' ? 'FR' : 'DZ';
-        dom.btnOverlayLang.textContent = `Langue micro : ${state.voiceLang === 'fr-FR' ? 'FR / Darija' : 'Arabe DZ'}`;
+        dom.btnOverlayLang.textContent = `Langue micro : ${state.voiceLang === 'fr-FR' ? 'Français (fr-FR)' : 'Darija DZ (ar-DZ)'}`;
         showToast(`Micro réglé sur : ${state.voiceLang === 'fr-FR' ? 'Français / Darija' : 'Arabe Algérien (ar-DZ)'}`, 'info');
       });
 
