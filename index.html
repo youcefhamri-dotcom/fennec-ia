@@ -2723,10 +2723,6 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
 
       const isMale = state.settings.voiceGender === 'male';
       const voiceName = state.settings.voiceProfile || (isMale ? 'Puck' : 'Aoede');
-      const stylePrompt = isMale
-        ? `اقرأ هذا الكلام بلهجة جزائرية عاصمية حقيقية وسريعة وطبيعية (لهجة الجزائر العاصمة، بدون لهجة مشرقية أو مغربية) وبصوت رجالي دافئ وحيوي: ${cleanText}`
-        : `اقرأ هذا الكلام بلهجة جزائرية عاصمية حقيقية وسريعة وطبيعية (لهجة الجزائر العاصمة، بدون لهجة مشرقية أو مغربية) وبصوت نسائي دافئ وحيوي: ${cleanText}`;
-
       try {
         const ttsModels = ['gemini-3.8-flash-lite-tts', 'gemini-3.1-flash-tts-preview', 'gemini-2.5-flash-preview-tts'];
         let response = null;
@@ -2736,7 +2732,7 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              contents: [{ parts: [{ text: stylePrompt }] }],
+              contents: [{ parts: [{ text: cleanText }] }],
               generationConfig: {
                 responseModalities: ["AUDIO"],
                 speechConfig: {
