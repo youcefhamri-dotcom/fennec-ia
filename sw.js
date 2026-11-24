@@ -1,5 +1,14 @@
-const CACHE_NAME = 'fennec-ia-v1';
-const ASSETS = ['./', './index.html', './manifest.json', './icon.svg'];
+const CACHE_NAME = 'fennec-ia-v2';
+const ASSETS = [
+  './',
+  './index.html',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png',
+  './icon.svg',
+  './avatar-femme-dz.jpg',
+  './avatar-homme-dz.jpg'
+];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
