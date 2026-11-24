@@ -2211,7 +2211,7 @@
       if (!getCurrentApiKey()) {
         throw new Error("Aucune clé API configurée. Ouvre ⚙️ Paramètres → Fennec Core et ajoute ta clé API gratuite (aistudio.google.com), ou utilise le moteur Cloud.");
       }
-      const modelCandidates = ['gemini-3.5-flash-lite', 'gemini-flash-lite-latest', 'gemini-3.5-flash', 'gemini-3.7-flash', 'gemma-4-26b-a4b-it'];
+      // Fast parallel race configured below
 
       const aiName = state.settings.aiName || 'Fennec IA';
       const isMale = state.settings.voiceGender === 'male';
@@ -2256,6 +2256,37 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
 
       contents.push({ role: 'user', parts });
 
+      async function queryOneModel(modelName, timeoutMs = 8000) {
+        const controller = new AbortController();
+        const tid = setTimeout(() => controller.abort(), timeoutMs);
+        try {
+          const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${getCurrentApiKey()}`;
+          const reqBody = modelName.startsWith('gemma-')
+            ? JSON.stringify({
+                contents: [{ role: 'user', parts: [{ text: systemPrompt + '\n\nMessage : ' + promptBody }] }],
+                generationConfig: { temperature: 0.55, maxOutputTokens: isVoiceMode ? 450 : 1200 }
+              })
+            : payload;
+          const res = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            signal: controller.signal,
+            body: reqBody
+          });
+          clearTimeout(tid);
+          if (!res.ok) {
+            if (res.status === 429 || res.status === 403) rotateApiKey();
+            const err = new Error('HTTP ' + res.status);
+            err.response = res;
+            throw err;
+          }
+          return res;
+        } catch (err) {
+          clearTimeout(tid);
+          throw err;
+        }
+      }
+
       let response = null;
       let lastErr = null;
       const payload = JSON.stringify({
@@ -2267,30 +2298,25 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
         }
       });
 
-      for (const modelName of modelCandidates) {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 6500);
+      // Round 1 : course parallèle entre les 2 modèles les plus rapides (zéro attente si l'un renvoie 503)
+      try {
+        response = await Promise.any([
+          queryOneModel('gemini-3.5-flash-lite', 8000),
+          queryOneModel('gemini-flash-lite-latest', 8000)
+        ]);
+      } catch (aggErr) {
+        lastErr = aggErr?.errors?.[0] || aggErr;
+        if (lastErr?.response) response = lastErr.response;
+        // Round 2 : courte pause 600ms puis nouvelle course avec secours gemma-4-26b-a4b-it
+        await new Promise(r => setTimeout(r, 600));
         try {
-          const urlBuilder = (key) => `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${key}`;
-          const reqBody = modelName.startsWith('gemma-')
-            ? JSON.stringify({
-                contents: [{ role: 'user', parts: [{ text: systemPrompt + '\n\nQuestion : ' + promptBody }] }],
-                generationConfig: { temperature: 0.55, maxOutputTokens: isVoiceMode ? 450 : 1200 }
-              })
-            : payload;
-          const res = await fetchWithBackoff(urlBuilder, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            signal: controller.signal,
-            body: reqBody
-          }, 0);
-          clearTimeout(timeoutId);
-          response = res;
-          if (res.ok) break;
-          if (![403, 404, 429, 500, 502, 503, 504].includes(res.status)) break;
-        } catch (err) {
-          clearTimeout(timeoutId);
-          lastErr = err;
+          response = await Promise.any([
+            queryOneModel('gemini-3.5-flash-lite', 9000),
+            queryOneModel('gemma-4-26b-a4b-it', 9000)
+          ]);
+        } catch (aggErr2) {
+          lastErr = aggErr2?.errors?.[0] || aggErr2;
+          if (lastErr?.response) response = lastErr.response;
         }
       }
 
