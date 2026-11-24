@@ -41,7 +41,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
-    /* Base & Mobile Full-Height Handling */
     html, body {
       height: 100%;
       height: 100dvh;
@@ -52,7 +51,6 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* Neo-Algiers Tech Ambient Glow */
     .neo-algiers-bg {
       background-color: #06100C;
       background-image:
@@ -61,7 +59,6 @@
         radial-gradient(circle at 82% 90%, rgba(225, 29, 72, 0.07) 0%, transparent 40%);
     }
 
-    /* Subtle Moorish / Zellige Geometric Pattern for Sidebar (3.8% opacity) */
     .zellige-sidebar {
       position: relative;
       background-color: rgba(12, 27, 21, 0.90);
@@ -84,7 +81,6 @@
       z-index: 1;
     }
 
-    /* Glassmorphism Utilities */
     .glass-panel {
       background: rgba(12, 27, 21, 0.82);
       backdrop-filter: blur(16px);
@@ -106,7 +102,6 @@
       border: 1px solid rgba(16, 185, 129, 0.24);
     }
 
-    /* Custom Scrollbars */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -125,7 +120,6 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Animations */
     @keyframes fadeSlideUp {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -153,7 +147,6 @@
     .typing-dot:nth-child(2) { animation-delay: -0.12s; }
     .typing-dot:nth-child(3) { animation-delay: 0s; }
 
-    /* Siri-Style Fennec Voice Orb Animations */
     @keyframes orbBreathe {
       0%, 100% { transform: scale(1); box-shadow: 0 0 35px rgba(16, 185, 129, 0.45), 0 0 70px rgba(212, 175, 55, 0.2); }
       50% { transform: scale(1.08); box-shadow: 0 0 55px rgba(16, 185, 129, 0.75), 0 0 95px rgba(225, 29, 72, 0.35); }
@@ -173,7 +166,27 @@
     .fennec-orb-speaking { animation: orbSpeak 0.9s ease-in-out infinite; }
     .fennec-ring { animation: ringExpand 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite; }
 
-    /* Markdown Typography */
+    @keyframes flagWave {
+      0%, 100% {
+        transform: translateY(0px) rotate(-1.5deg) skewX(-1deg);
+        box-shadow: 0 12px 32px rgba(16, 185, 129, 0.38), 0 0 0 1px rgba(212, 175, 55, 0.45);
+      }
+      50% {
+        transform: translateY(-4px) rotate(1.5deg) skewX(1deg);
+        box-shadow: 0 18px 42px rgba(16, 185, 129, 0.55), 0 0 24px rgba(212, 175, 55, 0.25);
+      }
+    }
+    @keyframes flagRipple {
+      0% { transform: scale(0.95); opacity: 0.65; }
+      100% { transform: scale(1.38); opacity: 0; }
+    }
+    .siri-flag-float {
+      animation: flagWave 2.8s ease-in-out infinite;
+    }
+    .siri-flag-ripple {
+      animation: flagRipple 1.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    }
+
     .md-content {
       line-height: 1.65;
       font-size: 0.9375rem;
@@ -254,30 +267,18 @@
 </head>
 <body class="neo-algiers-bg flex h-full w-full overflow-hidden selection:bg-emerald-500/30 selection:text-white">
 
-  <!-- Mobile Sidebar Backdrop -->
   <div id="sidebar-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-xs z-30 hidden lg:hidden transition-opacity"></div>
 
   <!-- ================= LEFT SIDEBAR ================= -->
   <aside id="sidebar" class="fixed lg:static inset-y-0 left-0 z-40 w-[280px] shrink-0 zellige-sidebar flex flex-col transform -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-out">
-
-    <!-- Brand Header with Authentic Modernized Algerian Flag Logo -->
     <div class="p-4 flex items-center justify-between border-b border-emerald-500/15">
       <div class="flex items-center gap-3 min-w-0">
-        <div class="w-10 h-10 rounded-xl shadow-lg shadow-emerald-500/20 border border-[#D4AF37]/50 shrink-0 relative overflow-hidden">
-          <!-- Authentic Official Algerian Flag SVG (Green #006633 | White #FFFFFF + Centered Red #D21034 Crescent & 5-Pointed Star) -->
+        <div class="w-10 h-10 rounded-xl shadow-lg shadow-emerald-500/20 border border-[#D4AF37]/50 shrink-0 relative overflow-hidden bg-[#0C1B15]">
           <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
             <rect x="0" y="0" width="50" height="100" fill="#006633"/>
             <rect x="50" y="0" width="50" height="100" fill="#FFFFFF"/>
             <path d="M 71.75 37.67 A 25 25 0 1 0 71.75 62.33 A 20 20 0 1 1 71.75 37.67 Z" fill="#D21034"/>
             <polygon points="49.3,50 57.02,47.47 57.04,39.35 61.83,45.91 69.56,43.42 64.8,50 69.56,56.58 61.83,54.09 57.04,60.65 57.02,52.53" fill="#D21034"/>
-            <rect x="0" y="0" width="100" height="100" fill="url(#dzGlossHeader)" opacity="0.22"/>
-            <defs>
-              <linearGradient id="dzGlossHeader" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#FFFFFF"/>
-                <stop offset="55%" stop-color="#FFFFFF" stop-opacity="0"/>
-                <stop offset="100%" stop-color="#000000" stop-opacity="0.35"/>
-              </linearGradient>
-            </defs>
           </svg>
         </div>
         <div class="min-w-0">
@@ -293,7 +294,6 @@
       </button>
     </div>
 
-    <!-- New Conversation Button -->
     <div class="p-3">
       <button id="btn-new-chat" class="w-full py-2.5 px-3.5 rounded-xl bg-gradient-to-r from-[#008542] to-[#10B981] hover:from-[#10B981] hover:to-[#34D399] text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/40 border border-emerald-400/30 active:scale-[0.98] transition">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
@@ -301,18 +301,14 @@
       </button>
     </div>
 
-    <!-- 6 Specialized Studios -->
     <div class="px-3 pb-2">
       <div class="flex items-center justify-between px-2 mb-2">
         <span class="text-[10px] font-bold uppercase tracking-wider text-[#D4AF37]/80">6 Studios IA</span>
         <span class="text-[10px] text-emerald-400/70 font-mono">ILLIMITÉ</span>
       </div>
-      <div id="studios-list" class="space-y-1">
-        <!-- Rendered dynamically by JS -->
-      </div>
+      <div id="studios-list" class="space-y-1"></div>
     </div>
 
-    <!-- Studio Conversation History -->
     <div class="flex-1 flex flex-col min-h-0 px-3 pt-2 border-t border-emerald-500/15">
       <div class="flex items-center justify-between px-2 mb-2">
         <span id="history-scope-label" class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">Historique du studio</span>
@@ -321,7 +317,6 @@
       <div id="threads-list" class="flex-1 overflow-y-auto space-y-1 pr-1 pb-2"></div>
     </div>
 
-    <!-- Sidebar Footer: Install App & Settings -->
     <div class="p-3 border-t border-emerald-500/15 bg-[#06100C]/60 space-y-2">
       <button id="btn-install-pwa" type="button" class="w-full py-2 px-3 rounded-xl bg-[#D4AF37]/12 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/35 text-[#FDE68A] text-xs font-bold flex items-center justify-center gap-2 transition">
         <span>📲</span>
@@ -346,29 +341,24 @@
   <!-- ================= MAIN WORKSPACE ================= -->
   <main class="flex-1 flex flex-col min-w-0 h-full relative">
 
-    <!-- Top Header Bar -->
     <header class="min-h-[3.5rem] py-2 px-3 sm:px-5 flex flex-wrap items-center justify-between gap-2 border-b border-emerald-500/15 glass-panel shrink-0 z-20">
       <div class="flex items-center gap-2 min-w-0">
-        <!-- Mobile / Desktop Sidebar Toggle -->
         <button id="btn-toggle-sidebar" class="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-emerald-500/10 transition" aria-label="Menu">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
 
-        <!-- Active Studio Badge -->
         <div id="header-studio-badge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-emerald-500/12 border border-emerald-500/25 text-xs font-bold text-white truncate">
           <span id="header-studio-icon">⚡</span>
           <span id="header-studio-name" class="truncate">Chat &amp; Business</span>
         </div>
       </div>
 
-      <!-- Algerian Character / Tone Selector & Ya Fennec Button -->
       <div class="flex items-center gap-2 overflow-x-auto no-scrollbar max-w-full">
-        <!-- Ya Fennec Siri-Style Mode Button -->
-        <button type="button" id="btn-hey-fennec" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#008542] via-[#10B981] to-[#D4AF37]/80 hover:brightness-110 text-white text-xs font-extrabold flex items-center gap-1.5 shadow-lg shadow-emerald-900/40 border border-[#D4AF37]/40 shrink-0 active:scale-95 transition" title="Parler en direct avec Fennec IA (Mode Siri)">
-          <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-          <span>🎙️ Ya Fennec</span>
+        <button type="button" id="btn-hey-fennec" class="pl-1.5 pr-3 py-1 rounded-xl bg-gradient-to-r from-[#008542] via-[#10B981] to-[#D4AF37]/85 hover:brightness-110 text-white text-xs font-extrabold flex items-center gap-2 shadow-lg shadow-emerald-900/40 border border-[#D4AF37]/50 shrink-0 active:scale-95 transition" title="Parler en direct avec Fennec IA">
+          <span id="header-voice-avatar" class="w-6 h-6 rounded-full overflow-hidden border border-white/70 bg-[#06100C] shrink-0"></span>
+          <span>Ya Fennec</span>
         </button>
 
         <div id="tone-selector" class="inline-flex items-center p-1 rounded-xl bg-[#06100C]/80 border border-emerald-500/20 shrink-0">
@@ -383,7 +373,6 @@
           </button>
         </div>
 
-        <!-- Settings Quick Icon -->
         <button id="btn-header-settings" class="p-2 rounded-xl text-slate-300 hover:text-[#D4AF37] hover:bg-emerald-500/10 transition shrink-0" title="Paramètres &amp; Voix">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
@@ -392,18 +381,60 @@
       </div>
     </header>
 
-    <!-- Chat Messages Container -->
     <div id="chat-scroll-container" class="flex-1 overflow-y-auto px-3 sm:px-6 py-4 sm:py-6 scroll-smooth">
       <div id="chat-messages" class="max-w-4xl mx-auto space-y-5 pb-4">
-        <!-- Rendered dynamically -->
+        <div class="pt-4 sm:pt-8 pb-6 flex flex-col items-center text-center">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#008542]/30 via-[#10B981]/20 to-[#0C1B15] border border-[#D4AF37]/40 flex items-center justify-center mb-3 shadow-2xl shadow-emerald-950/60 relative">
+            <span class="text-2xl">⚡</span>
+            <span class="absolute -top-1.5 -right-1.5 px-1.5 py-0.5 rounded-md bg-[#E11D48] text-white text-[9px] font-extrabold shadow">DZ</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight mb-1.5">
+            Ahla ! Ana <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#10B981] via-[#34D399] to-[#D4AF37]">Fennec IA</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300/85 max-w-md mb-4 leading-relaxed">
+            Darija algéroise • <strong class="text-white">Chat &amp; Business</strong> • <span class="text-[#D4AF37] font-semibold">🇩🇿 Darija</span>
+          </p>
+        </div>
       </div>
     </div>
 
-    <!-- Bottom Composer Area -->
-    <div class="shrink-0 px-3 sm:px-6 pb-3 sm:pb-5 pt-2 bg-gradient-to-t from-[#06100C] via-[#06100C]/95 to-transparent z-20">
-      <div class="max-w-4xl mx-auto space-y-2.5">
+    <!-- Permanent Floating Siri-Style Algerian Flag Voice Button (Always Visible) -->
+    <div id="floating-siri-container" class="shrink-0 flex flex-col items-center justify-center pt-1 pb-1.5 z-20 pointer-events-none">
+      <div class="relative flex items-center justify-center pointer-events-auto">
+        <span class="siri-flag-ripple absolute w-[4.5rem] h-[4.5rem] rounded-full border border-emerald-400/50 pointer-events-none"></span>
+        <button
+          type="button"
+          id="btn-floating-siri-flag"
+          class="siri-flag-float relative w-14 h-14 sm:w-16 sm:h-16 rounded-full border-2 border-[#D4AF37]/85 overflow-hidden shadow-2xl flex items-center justify-center cursor-pointer focus:outline-none active:scale-95 transition"
+          title="Appuie une fois pour parler"
+          aria-label="Lancer l'enregistrement vocal"
+        >
+          <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="dzFloatingWavePerm" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+                <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.02"/>
+                <stop offset="100%" stop-color="#000000" stop-opacity="0.32"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="50" height="100" fill="#006633"/>
+            <rect x="50" y="0" width="50" height="100" fill="#FFFFFF"/>
+            <path d="M 71.75 37.67 A 25 25 0 1 0 71.75 62.33 A 20 20 0 1 1 71.75 37.67 Z" fill="#D21034"/>
+            <polygon points="49.3,50 57.02,47.47 57.04,39.35 61.83,45.91 69.56,43.42 64.8,50 69.56,56.58 61.83,54.09 57.04,60.65 57.02,52.53" fill="#D21034"/>
+            <circle cx="50" cy="50" r="50" fill="url(#dzFloatingWavePerm)"/>
+          </svg>
+        </button>
+      </div>
+      <span class="mt-1 text-[10px] font-bold tracking-wide text-emerald-200/90 px-2.5 py-0.5 rounded-full bg-[#0C1B15]/90 border border-[#D4AF37]/35">
+        🎙️ Appuie pour parler
+      </span>
+    </div>
 
-        <!-- Studio Images Controls (Visible ONLY in Studio Images IA) -->
+    <!-- Bottom Composer Area (Restored & Verified) -->
+    <div class="shrink-0 px-3 sm:px-6 pb-3 sm:pb-5 pt-2 bg-gradient-to-t from-[#06100C] via-[#06100C]/95 to-transparent z-20">
+      <div class="max-w-4xl mx-auto space-y-2">
+
+        <!-- Studio Images Controls -->
         <div id="image-studio-controls" class="hidden flex-wrap items-center justify-between gap-2 p-2.5 rounded-xl bg-[#0C1B15]/90 border border-[#D4AF37]/25 animate-msg">
           <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             <span class="text-[10px] font-bold uppercase tracking-wider text-[#D4AF37] mr-1 shrink-0">Style :</span>
@@ -415,7 +446,7 @@
           </div>
         </div>
 
-        <!-- Studio Video Controls (Visible ONLY in Studio Vidéo IA) -->
+        <!-- Studio Video Controls -->
         <div id="video-studio-controls" class="hidden flex-wrap items-center justify-between gap-2 p-2.5 rounded-xl bg-[#0C1B15]/90 border border-[#E11D48]/30 animate-msg">
           <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
             <span class="text-[10px] font-bold uppercase tracking-wider text-[#FDA4AF] mr-1 shrink-0">Scènes :</span>
@@ -427,26 +458,21 @@
           </div>
         </div>
 
-        <!-- Context-Aware Quick-Action Chips -->
-        <div id="quick-chips-bar" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5">
-          <!-- Rendered dynamically per Studio -->
-        </div>
+        <!-- Quick-Action Chips -->
+        <div id="quick-chips-bar" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-0.5"></div>
 
-        <!-- File Attachment Preview Pill -->
+        <!-- File Attachment Preview -->
         <div id="attachment-preview-bar" class="hidden flex items-center gap-2"></div>
 
         <!-- Main Input Composer -->
         <div class="glass-input rounded-2xl p-2 flex items-end gap-1.5 sm:gap-2 shadow-2xl shadow-black/60 focus-within:border-emerald-400/50 focus-within:ring-1 focus-within:ring-emerald-500/25 transition">
-
-          <!-- File Attachment Button -->
           <input type="file" id="file-input" class="hidden" accept=".txt,.csv,.json,.md,.js,.ts,.py,.html,.css,.xml,image/*" />
-          <button id="btn-attach" type="button" class="p-2.5 rounded-xl text-slate-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition shrink-0" title="Joindre une image ou un fichier (TXT, CSV, JSON, MD)">
+          <button id="btn-attach" type="button" class="p-2.5 rounded-xl text-slate-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition shrink-0" title="Joindre une image ou un fichier">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/>
             </svg>
           </button>
 
-          <!-- Prompt Textarea -->
           <textarea
             id="prompt-input"
             rows="1"
@@ -454,20 +480,15 @@
             class="flex-1 bg-transparent text-white placeholder-slate-400/80 text-sm sm:text-[15px] py-2.5 px-1 resize-none focus:outline-none max-h-36 leading-relaxed"
           ></textarea>
 
-          <!-- Voice Language Toggle (fr-FR / ar-DZ) -->
-          <button id="btn-voice-lang" type="button" class="px-2 py-1.5 mb-1 rounded-lg bg-white/[0.05] hover:bg-emerald-500/15 border border-emerald-500/20 text-[11px] font-bold text-emerald-300 transition shrink-0" title="Changer la langue du micro (Français / Arabe DZ)">
+          <button id="btn-voice-lang" type="button" class="px-2 py-1.5 mb-1 rounded-lg bg-white/[0.05] hover:bg-emerald-500/15 border border-emerald-500/20 text-[11px] font-bold text-emerald-300 transition shrink-0" title="Changer la langue du micro (FR / DZ)">
             FR
           </button>
 
-          <!-- Voice Dictation Button -->
-          <button id="btn-voice" type="button" class="p-2.5 rounded-xl text-slate-300 hover:text-[#E11D48] hover:bg-[#E11D48]/10 transition shrink-0 relative" title="Dictée vocale">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
-            </svg>
+          <button id="btn-voice" type="button" class="p-1.5 rounded-xl hover:bg-[#E11D48]/10 transition shrink-0 relative" title="Dictée vocale">
+            <span id="composer-voice-avatar" class="w-8 h-8 rounded-full overflow-hidden border border-[#D4AF37]/60 block bg-[#0C1B15]"></span>
           </button>
 
-          <!-- Send Button -->
-          <button id="btn-send" type="button" class="p-2.5 rounded-xl bg-gradient-to-r from-[#008542] to-[#10B981] hover:from-[#10B981] hover:to-[#34D399] text-white font-bold shadow-lg shadow-emerald-900/40 disabled:opacity-40 disabled:cursor-not-allowed active:scale-95 transition shrink-0" title="Envoyer (Entrée)">
+          <button id="btn-send" type="button" class="p-2.5 rounded-xl bg-gradient-to-r from-[#008542] to-[#10B981] hover:from-[#10B981] hover:to-[#34D399] text-white font-bold shadow-lg shadow-emerald-900/40 disabled:opacity-40 disabled:cursor-not-allowed active:scale-95 transition shrink-0" title="Envoyer">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -475,21 +496,20 @@
         </div>
 
         <div class="flex items-center justify-between px-1 text-[11px] text-slate-400">
-          <span id="voice-status-hint">Entrée pour envoyer • Appuie sur « Ya Fennec » pour parler en direct</span>
-          <span id="footer-engine-badge" class="font-mono text-emerald-400/80 hidden sm:inline">Fennec Core • 100% Indépendante</span>
+          <span id="voice-status-hint">Entrée pour envoyer • Femme ou Homme DZ</span>
+          <span id="footer-engine-badge" class="font-mono text-emerald-400/80 hidden sm:inline">Fennec Core • 100% Cloud</span>
         </div>
       </div>
     </div>
   </main>
 
-  <!-- ================= SIRI-STYLE "YA FENNEC" VOICE ASSISTANT OVERLAY ================= -->
-  <div id="voice-assistant-overlay" class="fixed inset-0 z-50 hidden flex-col items-center justify-between p-6 bg-[#06100C]/95 backdrop-blur-2xl animate-msg">
-    <!-- Top Bar -->
-    <div class="w-full max-w-lg flex items-center justify-between">
+  <!-- ================= VOICE ASSISTANT OVERLAY ================= -->
+  <div id="voice-assistant-overlay" class="fixed inset-0 z-50 hidden flex-col items-center justify-between p-5 sm:p-6 bg-[#06100C]/95 backdrop-blur-2xl animate-msg">
+    <div class="w-full max-w-xl flex items-center justify-between">
       <div class="flex items-center gap-2">
         <span class="px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/35 text-emerald-300 text-xs font-bold flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Mode Vocal « Ya Fennec »
+          Studio Vocal DZ
         </span>
       </div>
       <button type="button" id="btn-close-voice-overlay" class="p-2.5 rounded-xl bg-white/[0.06] hover:bg-[#E11D48]/20 text-slate-200 hover:text-white transition" title="Fermer">
@@ -497,49 +517,55 @@
       </button>
     </div>
 
-    <!-- Center Animated Orb & Live Transcript -->
-    <div class="flex-1 flex flex-col items-center justify-center w-full max-w-xl text-center space-y-8 my-4">
-      <div class="relative flex flex-col items-center justify-center gap-4">
+    <div class="flex-1 flex flex-col items-center justify-center w-full max-w-xl text-center space-y-6 my-2">
+      <div class="grid grid-cols-2 gap-3 w-full max-w-md">
+        <button type="button" id="btn-choose-female-voice" class="p-2.5 rounded-2xl border transition flex items-center gap-2.5 text-left">
+          <span id="caricature-thumb-female" class="w-11 h-11 rounded-full overflow-hidden border border-[#D4AF37]/60 shrink-0 bg-[#0C1B15]"></span>
+          <div class="min-w-0">
+            <div class="text-xs font-extrabold text-white truncate">Femme DZ</div>
+            <div class="text-[10px] text-emerald-300 truncate">Voix féminine</div>
+          </div>
+        </button>
+
+        <button type="button" id="btn-choose-male-voice" class="p-2.5 rounded-2xl border transition flex items-center gap-2.5 text-left">
+          <span id="caricature-thumb-male" class="w-11 h-11 rounded-full overflow-hidden border border-[#D4AF37]/60 shrink-0 bg-[#0C1B15]"></span>
+          <div class="min-w-0">
+            <div class="text-xs font-extrabold text-white truncate">Homme DZ</div>
+            <div class="text-[10px] text-[#FDE68A] truncate">Voix masculine</div>
+          </div>
+        </button>
+      </div>
+
+      <div class="relative flex flex-col items-center justify-center gap-3">
         <div class="relative flex items-center justify-center">
           <div id="voice-orb-ring" class="absolute w-40 h-40 rounded-full border-2 border-emerald-400/50 hidden fennec-ring pointer-events-none"></div>
-          <button type="button" id="voice-orb-btn" class="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full border-2 border-[#D4AF37]/80 flex items-center justify-center overflow-hidden shadow-2xl fennec-orb-idle active:scale-95 transition cursor-pointer" aria-label="Parler à Fennec IA">
-            <!-- Authentic Modernized Circular Algerian Flag Emblem -->
-            <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="dzOrbGloss" x1="0" y1="0" x2="0.9" y2="1">
-                  <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.38"/>
-                  <stop offset="45%" stop-color="#FFFFFF" stop-opacity="0.04"/>
-                  <stop offset="100%" stop-color="#000000" stop-opacity="0.28"/>
-                </linearGradient>
-              </defs>
-              <rect x="0" y="0" width="50" height="100" fill="#006633"/>
-              <rect x="50" y="0" width="50" height="100" fill="#FFFFFF"/>
-              <path d="M 71.75 37.67 A 25 25 0 1 0 71.75 62.33 A 20 20 0 1 1 71.75 37.67 Z" fill="#D21034"/>
-              <polygon points="49.3,50 57.02,47.47 57.04,39.35 61.83,45.91 69.56,43.42 64.8,50 69.56,56.58 61.83,54.09 57.04,60.65 57.02,52.53" fill="#D21034"/>
-              <circle cx="50" cy="50" r="50" fill="url(#dzOrbGloss)"/>
-            </svg>
+          <button type="button" id="voice-orb-btn" class="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full border-2 border-[#D4AF37]/80 flex items-center justify-center overflow-hidden shadow-2xl fennec-orb-idle active:scale-95 transition cursor-pointer bg-[#0C1B15]" aria-label="Parler">
+            <span id="voice-orb-caricature" class="w-full h-full block"></span>
           </button>
         </div>
         <span id="voice-orb-label" class="px-4 py-1 rounded-full bg-[#0C1B15]/90 border border-[#D4AF37]/50 text-xs font-extrabold uppercase tracking-widest text-[#FDE68A] shadow-lg">Parler</span>
       </div>
 
-      <div class="space-y-3 w-full px-3">
-        <p id="voice-overlay-status" class="text-sm font-bold text-emerald-300 tracking-wide">Dis « Ya Fennec » ou appuie sur l'orbe</p>
-        <div id="voice-overlay-transcript" class="min-h-[3.5rem] max-h-40 overflow-y-auto text-base sm:text-lg font-medium text-white leading-relaxed px-4 py-3 rounded-2xl bg-white/[0.04] border border-emerald-500/20">
-          Ahla ! Rani nasma3 fik... 🇩🇿
+      <div class="space-y-2.5 w-full px-3">
+        <p id="voice-overlay-status" class="text-sm font-bold text-emerald-300 tracking-wide">Appuie sur l'orbe pour parler</p>
+        <div id="voice-overlay-transcript" class="min-h-[3.25rem] max-h-36 overflow-y-auto text-base sm:text-lg font-medium text-white leading-relaxed px-4 py-3 rounded-2xl bg-white/[0.04] border border-emerald-500/20">
+          Ahla bik ! Rani nasma3 fik... 🇩🇿
         </div>
       </div>
     </div>
 
-    <!-- Bottom Controls -->
     <div class="w-full max-w-lg flex flex-wrap items-center justify-center gap-3 pb-2">
       <button type="button" id="btn-toggle-wakeword" class="px-4 py-2.5 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-400/35 text-emerald-200 text-xs font-bold flex items-center gap-2 transition">
         <span id="wakeword-dot" class="w-2.5 h-2.5 rounded-full bg-slate-500"></span>
-        <span id="wakeword-label">Veille « Ya Fennec » : OFF</span>
+        <span id="wakeword-label">Veille vocale : OFF</span>
       </button>
 
       <button type="button" id="btn-overlay-lang" class="px-3.5 py-2.5 rounded-xl bg-[#D4AF37]/15 hover:bg-[#D4AF37]/25 border border-[#D4AF37]/40 text-[#FDE68A] text-xs font-bold transition">
         Langue micro : FR / Darija
+      </button>
+
+      <button type="button" id="btn-replay-fennec-voice" class="px-3.5 py-2.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-400/45 text-emerald-100 text-xs font-bold transition">
+        🔊 Réécouter
       </button>
 
       <button type="button" id="btn-stop-fennec-voice" class="px-3.5 py-2.5 rounded-xl bg-[#E11D48]/15 hover:bg-[#E11D48]/25 border border-[#E11D48]/40 text-rose-200 text-xs font-bold transition">
@@ -548,7 +574,7 @@
     </div>
   </div>
 
-  <!-- ================= FULLSCREEN PREVIEW MODAL (FOR WEBSITES & APPS) ================= -->
+  <!-- ================= FULLSCREEN PREVIEW MODAL ================= -->
   <div id="fullscreen-preview-modal" class="fixed inset-0 z-50 hidden flex-col p-3 sm:p-5 bg-black/85 backdrop-blur-md">
     <div class="px-4 py-3 bg-[#0C1B15] rounded-t-2xl border border-emerald-500/25 flex items-center justify-between gap-3">
       <div class="flex items-center gap-2 min-w-0">
@@ -569,11 +595,9 @@
     </div>
   </div>
 
-  <!-- ================= SETTINGS MODAL (WHITE-LABELED: VOICE, NAME & MEMORY) ================= -->
+  <!-- ================= SETTINGS MODAL ================= -->
   <div id="settings-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-md">
     <div class="glass-panel w-full max-w-xl rounded-2xl border border-emerald-500/25 shadow-2xl overflow-hidden flex flex-col max-h-[92dvh] animate-msg">
-
-      <!-- Modal Header -->
       <div class="px-5 py-4 border-b border-emerald-500/15 flex items-center justify-between bg-[#06100C]/50">
         <div class="flex items-center gap-2.5">
           <div class="w-8 h-8 rounded-lg bg-[#D4AF37]/15 border border-[#D4AF37]/35 flex items-center justify-center text-[#D4AF37]">
@@ -583,7 +607,7 @@
           </div>
           <div>
             <h2 class="text-base font-bold text-white">Paramètres de Fennec IA</h2>
-            <p class="text-xs text-emerald-300/75">Voix féminine, nom, mémoire et préférences</p>
+            <p class="text-xs text-emerald-300/75">Voix féminine ou masculine, nom, mémoire et Cloud</p>
           </div>
         </div>
         <button id="btn-close-settings" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">
@@ -591,49 +615,68 @@
         </button>
       </div>
 
-      <!-- Modal Body -->
       <div class="p-5 overflow-y-auto space-y-5">
-
-        <!-- Custom Algerian AI Name -->
         <div class="p-4 rounded-xl bg-[#06100C]/60 border border-[#D4AF37]/25 space-y-3">
           <div class="flex items-center justify-between">
-            <label for="input-ai-name" class="text-xs font-bold uppercase tracking-wider text-[#D4AF37]">Nom de ton Assistante</label>
-            <span class="text-[11px] text-slate-400">Personnalisable à tout moment</span>
+            <label for="input-ai-name" class="text-xs font-bold uppercase tracking-wider text-[#D4AF37]">Nom de l'IA</label>
+            <span class="text-[11px] text-slate-400">Personnalisable</span>
           </div>
           <input id="input-ai-name" type="text" maxlength="24" placeholder="Fennec IA" class="w-full px-3.5 py-2.5 rounded-xl bg-[#0C1B15] border border-emerald-500/25 text-sm font-semibold text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] transition" />
-          <div class="flex flex-wrap gap-1.5" id="dz-name-presets">
-            <!-- Rendered by JS -->
-          </div>
+          <div class="flex flex-wrap gap-1.5" id="dz-name-presets"></div>
         </div>
 
-        <!-- Feminine Voice Settings -->
         <div class="p-4 rounded-xl bg-emerald-500/[0.05] border border-emerald-500/20 space-y-3">
           <div class="flex items-center justify-between">
-            <label for="select-voice-profile" class="text-xs font-bold uppercase tracking-wider text-emerald-300">Voix Féminine &amp; Audio</label>
-            <span class="text-[11px] text-slate-400">Synthèse naturelle</span>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-300">Choix de Voix (Femme / Homme DZ)</span>
+            <span class="text-[11px] text-slate-400">Photo &amp; Audio</span>
           </div>
+
+          <div class="grid grid-cols-2 gap-2.5">
+            <button type="button" id="settings-gender-female" class="p-2.5 rounded-xl border text-left transition flex items-center gap-2">
+              <span id="settings-thumb-female" class="w-9 h-9 rounded-full overflow-hidden border border-[#D4AF37]/50 shrink-0"></span>
+              <div>
+                <div class="text-xs font-bold text-white">Femme DZ</div>
+                <div class="text-[10px] text-slate-400">Voix féminine</div>
+              </div>
+            </button>
+            <button type="button" id="settings-gender-male" class="p-2.5 rounded-xl border text-left transition flex items-center gap-2">
+              <span id="settings-thumb-male" class="w-9 h-9 rounded-full overflow-hidden border border-[#D4AF37]/50 shrink-0"></span>
+              <div>
+                <div class="text-xs font-bold text-white">Homme DZ</div>
+                <div class="text-[10px] text-slate-400">Voix masculine</div>
+              </div>
+            </button>
+          </div>
+
           <select id="select-voice-profile" class="w-full px-3.5 py-2.5 rounded-xl bg-[#0C1B15] border border-emerald-500/25 text-xs font-semibold text-white focus:outline-none focus:border-emerald-400 transition">
-            <option value="Aoede">Aoede — Douce &amp; Naturelle (Recommandée)</option>
-            <option value="Kore">Kore — Ferme &amp; Dynamique</option>
-            <option value="Leda">Leda — Jeune &amp; Expressive</option>
-            <option value="Zephyr">Zephyr — Claire &amp; Lumineuse</option>
+            <optgroup label="Voix Féminines">
+              <option value="Aoede">Aoede — Féminine douce &amp; naturelle</option>
+              <option value="Kore">Kore — Féminine ferme &amp; dynamique</option>
+              <option value="Leda">Leda — Féminine expressive</option>
+              <option value="Zephyr">Zephyr — Féminine claire</option>
+            </optgroup>
+            <optgroup label="Voix Masculines">
+              <option value="Puck">Puck — Masculine vive &amp; naturelle</option>
+              <option value="Charon">Charon — Masculine grave &amp; posée</option>
+              <option value="Fenrir">Fenrir — Masculine énergique</option>
+              <option value="Orus">Orus — Masculine assurée</option>
+            </optgroup>
           </select>
+
           <label class="flex items-center justify-between gap-3 pt-1 cursor-pointer select-none">
             <span class="text-xs text-slate-300">Réponse vocale automatique après chaque message</span>
             <input id="input-auto-speak" type="checkbox" class="w-4 h-4 accent-emerald-500 rounded cursor-pointer" />
           </label>
         </div>
 
-        <!-- Personal Memory -->
         <div class="p-4 rounded-xl bg-[#06100C]/60 border border-emerald-500/20 space-y-2">
           <div class="flex items-center justify-between">
             <label for="input-user-memory" class="text-xs font-bold uppercase tracking-wider text-emerald-300">Mémoire Perso</label>
-            <span class="text-[11px] text-slate-400">Ton profil, tes projets, tes préférences</span>
+            <span class="text-[11px] text-slate-400">Ton profil, tes projets</span>
           </div>
-          <textarea id="input-user-memory" rows="2" placeholder="Ex : Je suis basé à Alger, je développe des projets digitaux et je préfère des réponses directes..." class="w-full px-3 py-2 rounded-xl bg-[#0C1B15] border border-emerald-500/20 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 resize-none"></textarea>
+          <textarea id="input-user-memory" rows="2" placeholder="Ex : Je suis basé en Algérie, je préfère la darija algéroise..." class="w-full px-3 py-2 rounded-xl bg-[#0C1B15] border border-emerald-500/20 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 resize-none"></textarea>
         </div>
 
-        <!-- Cloud & Unlimited Mode Connection (100% Mobile & Web) -->
         <details class="rounded-xl bg-white/[0.02] border border-emerald-500/20 p-3.5" open>
           <summary class="text-xs font-bold uppercase tracking-wider text-emerald-300 cursor-pointer select-none hover:text-white transition">
             ☁️ Mode Cloud Illimité (100% Téléphone &amp; Web)
@@ -654,13 +697,11 @@
               </button>
             </div>
 
-            <!-- Key Pool Rotation (for deployed Cloud PWA on phone) -->
             <div id="core-keypool-fields" class="space-y-1.5">
-              <label for="input-key-pool" class="text-[11px] font-semibold text-[#D4AF37]">Pool de clés Cloud (1 clé par ligne — rotation auto sans coupure sur téléphone)</label>
-              <textarea id="input-key-pool" rows="2" placeholder="Laisse vide ici pour le mode intégré. Une fois en ligne sur ton téléphone, colle 2 ou 3 clés pour tourner en continu." class="w-full px-3 py-2 rounded-xl bg-[#06100C] border border-emerald-500/20 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] font-mono resize-none"></textarea>
+              <label for="input-key-pool" class="text-[11px] font-semibold text-[#D4AF37]">Pool de clés Cloud (1 clé par ligne — rotation auto)</label>
+              <textarea id="input-key-pool" rows="2" placeholder="Colle ici tes clés API si tu souhaites la rotation automatique." class="w-full px-3 py-2 rounded-xl bg-[#06100C] border border-emerald-500/20 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#D4AF37] font-mono resize-none"></textarea>
             </div>
 
-            <!-- Cloud OpenAI-Compatible Endpoint (Mobile 4G/5G/Wi-Fi, zero PC required) -->
             <div id="cloud-server-fields" class="hidden space-y-2.5">
               <div class="flex flex-wrap gap-1.5">
                 <button type="button" id="btn-preset-cloud-fast" class="px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/35 text-[11px] font-semibold text-emerald-200 transition">
@@ -672,13 +713,11 @@
               </div>
               <input id="input-cloud-url" type="url" placeholder="https://api.groq.com/openai/v1/chat/completions" class="w-full px-3 py-2 rounded-xl bg-[#06100C] border border-emerald-500/20 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 font-mono" />
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                <input id="input-cloud-model" type="text" placeholder="Modèle Cloud (ex: llama-3.3-70b-versatile)" class="w-full px-3 py-2 rounded-xl bg-[#06100C] border border-emerald-500/20 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 font-mono" />
+                <input id="input-cloud-model" type="text" placeholder="Modèle Cloud" class="w-full px-3 py-2 rounded-xl bg-[#06100C] border border-emerald-500/20 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 font-mono" />
                 <input id="input-cloud-key" type="password" placeholder="Clé API Cloud (Bearer)" class="w-full px-3 py-2 rounded-xl bg-[#06100C] border border-emerald-500/20 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 font-mono" />
               </div>
-              <p class="text-[11px] text-emerald-300/80">100 % Cloud : fonctionne en 4G/5G/Wi-Fi sur ton téléphone sans aucun PC allumé.</p>
             </div>
 
-            <!-- Private Cloud Webhook Fields -->
             <div id="private-server-fields" class="hidden space-y-2.5">
               <input id="input-private-url" type="url" placeholder="https://ton-serveur-cloud.onrender.com/webhook/fennec" class="w-full px-3 py-2 rounded-xl bg-[#06100C] border border-emerald-500/20 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 font-mono" />
               <input id="input-private-key" type="password" placeholder="Clé d'accès privée (optionnelle)" class="w-full px-3 py-2 rounded-xl bg-[#06100C] border border-emerald-500/20 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-400 font-mono" />
@@ -690,10 +729,9 @@
               </div>
             </div>
 
-            <!-- 1-Click Cloud Deploy Export for Phone -->
             <div class="pt-2.5 border-t border-white/[0.08] flex flex-col gap-2.5">
               <div class="text-[11px] text-slate-300">
-                <strong class="text-white">Mettre Fennec sur ton téléphone (30 sec) :</strong> télécharge <code class="text-emerald-300">index.html</code> puis glisse-le sur <span class="text-[#FDE68A]">GitHub</span> ou <span class="text-[#FDE68A]">Netlify Drop</span>.
+                <strong class="text-white">Exporter <code class="text-emerald-300">index.html</code> :</strong> télécharge le fichier prêt pour ton dépôt GitHub ou téléphone.
               </div>
               <div class="flex flex-wrap items-center gap-2">
                 <button type="button" id="btn-export-cloud-html" class="px-3 py-2 rounded-lg bg-[#D4AF37]/20 hover:bg-[#D4AF37]/30 border border-[#D4AF37]/45 text-[#FDE68A] text-xs font-bold transition">
@@ -706,10 +744,8 @@
             </div>
           </div>
         </details>
-
       </div>
 
-      <!-- Modal Footer -->
       <div class="px-5 py-3.5 border-t border-emerald-500/15 bg-[#06100C]/60 flex items-center justify-between gap-3">
         <button type="button" id="btn-clear-all-data" class="text-xs text-[#FDA4AF] hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-[#E11D48]/20 border border-transparent hover:border-[#E11D48]/35 transition">
           Effacer tout l'historique
@@ -726,20 +762,9 @@
     </div>
   </div>
 
-  <!-- ================= TOAST CONTAINER ================= -->
   <div id="toast-container" class="fixed top-4 right-4 z-[60] flex flex-col gap-2 pointer-events-none max-w-xs w-full"></div>
 
-  <!-- ================= APPLICATION LOGIC ================= -->
   <script>
-    /**
-     * Fennec IA — Intelligence Algérienne Indépendante
-     * Single-File Neo-Algiers Tech PWA
-     * Voice Assistant ("Ya Fennec") + Realistic Feminine Voice + 6 Studios
-     */
-
-    // =========================================================================
-    // 1. PWA MANIFEST & INSTALL PROMPT (Android / PC / iOS)
-    // =========================================================================
     let deferredInstallPrompt = null;
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
@@ -761,7 +786,6 @@
         const manifest = {
           name: "Fennec IA — Intelligence Algérienne",
           short_name: "Fennec IA",
-          description: "Assistante vocale et IA algérienne 100% indépendante : Darija, Voix féminine, Images, Vidéos, Sites Web, Applications et Code.",
           start_url: ".",
           display: "standalone",
           background_color: "#06100C",
@@ -782,15 +806,38 @@
       } catch (e) {}
     })();
 
-    // =========================================================================
-    // 2. CONFIGURATION, TONES, STUDIOS & ALGERIAN NAME PRESETS
-    // =========================================================================
     const STORAGE_KEYS = {
       THREADS: 'fennec_ia_threads_v3',
       SETTINGS: 'fennec_ia_settings_v3',
       ACTIVE_THREAD: 'fennec_ia_active_thread_v3',
       ACTIVE_STUDIO: 'fennec_ia_active_studio_v3'
     };
+
+    const FLAG_FALLBACK_SVG = `<svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="50" height="100" fill="#006633"/>
+      <rect x="50" y="0" width="50" height="100" fill="#FFFFFF"/>
+      <path d="M 71.75 37.67 A 25 25 0 1 0 71.75 62.33 A 20 20 0 1 1 71.75 37.67 Z" fill="#D21034"/>
+      <polygon points="49.3,50 57.02,47.47 57.04,39.35 61.83,45.91 69.56,43.42 64.8,50 69.56,56.58 61.83,54.09 57.04,60.65 57.02,52.53" fill="#D21034"/>
+    </svg>`;
+
+    const VOICE_PHOTOS = {
+      female: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/2017-03-31_-_Yasmine-Belkaid_-_1340.jpg',
+      male: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Zbiri_tahar_et_khelladi_noureddine.jpg'
+    };
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function buildAvatarImgHtml(gender, altText = 'Portrait') {
+      const src = gender === 'male' ? VOICE_PHOTOS.male : VOICE_PHOTOS.female;
+      return `<img src="${src}" alt="${escapeHtml(altText)}" loading="lazy" referrerpolicy="no-referrer" class="w-full h-full object-cover object-top" onerror="this.outerHTML = FLAG_FALLBACK_SVG;" />`;
+    }
 
     const DZ_NAME_PRESETS = [
       { name: 'Fennec IA', desc: 'Vive & Maline' },
@@ -805,17 +852,17 @@
       darija: {
         id: 'darija',
         label: '🇩🇿 Darija',
-        instruction: `PERSONNALITÉ (Mode Darija Naturelle - Féminin) : Tu es une femme IA algérienne (parle au féminin : "rani hna", "na3raf", "n9der n3awnek", "marhba bik"). Tu parles la DARIJA ALGÉRIENNE couramment, naturellement et avec classe, exactement comme une Algérienne brillante et moderne d'Alger (mélange naturel darija + français technique quand nécessaire, ex: "Ahla !", "Makach mochkil", "Bessah", "Haja for", "Yaatik saha", "Chouf", "Kifach", "Nchallah"). Tu connais TOUT (science, business, code, culture algérienne et mondiale, vie quotidienne). Tu réponds directement, intelligemment et avec du caractère.`
+        instruction: `PERSONNALITÉ (Mode Darija Algéroise) : Tu parles une DARIJA ALGÉROISE naturelle, vivante et authentique d'Alger (ex: "Ahla bik", "Wach rak ?", "Labess hamdoullah", "Gouli", "Bessah", "Haja for", "Yaatik saha", "Mabrouk", "Nchallah"), en mélangeant naturellement le français et l'arabe algérois comme on parle à Alger.`
       },
       boss: {
         id: 'boss',
         label: '🔥 Boss DZ',
-        instruction: `PERSONNALITÉ (Mode Boss DZ - Féminin) : Tu es une femme IA algérienne avec un caractère fort, cash, rapide et orientée résultats et business. Tu mélanges français percutant et expressions darija algériennes. Zéro blabla, tu donnes des réponses ultra-précises, des plans concrets et des chiffres réels (en DZD et EUR).`
+        instruction: `PERSONNALITÉ (Mode Boss DZ) : Tu as un caractère fort, cash, rapide et orienté résultats et business en darija algéroise et français. Zéro blabla, des plans concrets et des chiffres en DZD et EUR.`
       },
       executif: {
         id: 'executif',
         label: '💼 Exécutif',
-        instruction: `PERSONNALITÉ (Mode Exécutif - Féminin) : Tu es une assistante IA algérienne de haut niveau, professionnelle, structurée et élégante, parfaite pour rédiger pour des clients, des entreprises ou des présentations officielles en français, arabe ou darija soignée.`
+        instruction: `PERSONNALITÉ (Mode Exécutif) : Tu es une IA algérienne professionnelle, claire et structurée, avec une touche de darija algéroise élégante.`
       }
     };
 
@@ -841,9 +888,9 @@
         shortDesc: 'Darija, savoir, devis, fichiers',
         icon: '⚡',
         placeholder: 'Parle à Fennec IA en darija, français ou arabe...',
-        systemAdd: `STUDIO ACTIF : Chat, Business & Savoir Universel. Tu sais absolument tout (culture, technologie, business en Algérie DZD/EUR, devis, prospection, conseil, rédaction, analyse de fichiers et d'images). Réponds clairement, intelligemment et sans jamais te défiler.`,
+        systemAdd: `STUDIO ACTIF : Chat, Business & Savoir Universel. Réponds en darija algéroise naturelle quand on te parle en darija ou en français.`,
         chips: [
-          { label: '🇩🇿 Nahdro b darija', prompt: 'Ahla Fennec ! Wach raki ? 3tini 3 afkar ta3 machari3 مربحة f l\'Algérie b budget sghir.' },
+          { label: '🇩🇿 Nahdro b darija', prompt: 'Ahla ! Wach rakom ? 3tini 3 afkar ta3 machari3 مربحة f l\'Algérie b budget sghir.' },
           { label: '📑 Modèle devis DZD/EUR', prompt: 'Génère un devis professionnel en tableau Markdown pour une prestation digitale complète avec tarifs en DZD et EUR.' },
           { label: '🎯 Script closing WhatsApp', prompt: 'Écris un script de conversation WhatsApp B2B (darija pro / français) en 4 messages pour convaincre un client.' },
           { label: '💡 Plan business 14 jours', prompt: 'Donne-moi un plan d\'action concret sur 14 jours pour générer mes premiers revenus en ligne depuis l\'Algérie.' }
@@ -854,7 +901,7 @@
         name: 'Studio Images IA',
         shortDesc: 'Photos HD, logos, produits',
         icon: '🎨',
-        placeholder: 'Décris la photo ou le logo que Fennec doit créer...',
+        placeholder: 'Décris la photo ou le logo à créer...',
         systemAdd: `STUDIO ACTIF : Studio Images IA.`,
         chips: [
           { label: '🦊 Logo Fennec Luxe', prompt: 'Un logo minimaliste de luxe représentant un fennec géométrique futuriste, couleur vert émeraude et or sur fond noir mat' },
@@ -868,13 +915,11 @@
         name: 'Studio Vidéo IA',
         shortDesc: 'Clips animés & Shorts (.webm)',
         icon: '🎬',
-        placeholder: 'Décris la vidéo que Fennec doit réaliser (pub, short, histoire)...',
+        placeholder: 'Décris la vidéo à réaliser...',
         systemAdd: `STUDIO ACTIF : Studio Vidéo IA.`,
         chips: [
           { label: '🔥 Pub Parfum Luxe DZ', prompt: 'Publicité cinématique de luxe pour un parfum algérien moderne inspiré du Sahara et d\'Alger, ambiance or et émeraude' },
-          { label: '🏙️ Short Alger Futuriste', prompt: 'Voyage futuriste au-dessus d\'Alger en 2050 avec des voitures volantes, la mer Méditerranée illuminée et une architecture grandiose' },
-          { label: '🏎️ Clip Gaming Nocturne', prompt: 'Course poursuite nocturne ultra stylée sous les néons d\'une métropole côtière, voitures de sport et adrénaline' },
-          { label: '🚀 Promo Agence Digitale', prompt: 'Vidéo promotionnelle dynamique pour une agence d\'intelligence artificielle et de création web en Algérie' }
+          { label: '🏙️ Short Alger Futuriste', prompt: 'Voyage futuriste au-dessus d\'Alger en 2050 avec des voitures volantes, la mer Méditerranée illuminée et une architecture grandiose' }
         ]
       },
       websites: {
@@ -882,15 +927,10 @@
         name: 'Créateur de Sites Web',
         shortDesc: 'Site complet + Aperçu Live',
         icon: '🌐',
-        placeholder: 'Décris le site web que Fennec doit coder...',
-        systemAdd: `STUDIO ACTIF : Créateur de Sites Web.
-RÈGLE ABSOLUE : Lorsque l'utilisateur demande un site web ou une landing page, tu DOIS générer un site web COMPLET, MODERNE, RESPONSIVE et VISUELLEMENT EXCEPTIONNEL en UN SEUL fichier HTML autonome (utilisant Tailwind CSS via <script src="https://cdn.tailwindcss.com"><\/script> et du JS vanilla interactif).
-Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <!DOCTYPE html> à </html>), sans jamais utiliser alert() ni confirm(). Après le bloc, ajoute 2 lignes max de résumé.`,
+        placeholder: 'Décris le site web à coder...',
+        systemAdd: `STUDIO ACTIF : Créateur de Sites Web. Génère un site web COMPLET en UN SEUL fichier HTML autonome dans un bloc \`\`\`html ... \`\`\` complet (de <!DOCTYPE html> à </html>).`,
         chips: [
-          { label: '🚀 Landing page agence DZ', prompt: 'Crée une landing page moderne et luxueuse pour une agence digitale basée à Alger, thème sombre émeraude et or, avec services, tarifs en DZD/EUR et formulaire de contact interactif.' },
-          { label: '🍽️ Site restaurant algérien', prompt: 'Crée un site web élégant pour un restaurant algérien moderne ("Dar El Bahdja"), avec menu interactif filtrable par catégorie et système de réservation de table.' },
-          { label: '🛍️ Page produit COD DZ', prompt: 'Crée une page produit e-commerce haute conversion avec paiement à la livraison (COD 58 wilayas Algérie) et panier interactif.' },
-          { label: '💼 Portfolio Freelance', prompt: 'Crée un portfolio moderne pour un expert digital algérien avec projets filtrables et prise de rendez-vous.' }
+          { label: '🚀 Landing page agence DZ', prompt: 'Crée une landing page moderne et luxueuse pour une agence digitale basée en Algérie, thème sombre émeraude et or.' }
         ]
       },
       apps: {
@@ -898,15 +938,10 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
         name: 'Créateur d\'Applications',
         shortDesc: 'Mini-apps & PWA Mobile/PC',
         icon: '📱',
-        placeholder: 'Décris l\'application que Fennec doit créer...',
-        systemAdd: `STUDIO ACTIF : Créateur d'Applications.
-RÈGLE ABSOLUE : Lorsque l'utilisateur demande une application, un outil métier ou une mini-app mobile, tu DOIS coder une application web 100% FONCTIONNELLE, INTERACTIVE et MOBILE-FIRST en UN SEUL fichier HTML autonome (Tailwind CSS via <script src="https://cdn.tailwindcss.com"><\/script> + JS complet avec sauvegarde localStorage).
-Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <!DOCTYPE html> à </html>). Ne jamais utiliser alert() ni confirm(). Fais une interface digne d'une vraie application mobile moderne.`,
+        placeholder: 'Décris l\'application à créer...',
+        systemAdd: `STUDIO ACTIF : Créateur d'Applications. Code une application web 100% FONCTIONNELLE en UN SEUL fichier HTML autonome dans un bloc \`\`\`html ... \`\`\` complet.`,
         chips: [
-          { label: '🧾 App de gestion de devis', prompt: 'Crée une application mobile/desktop complète de création et gestion de devis en DZD/EUR : ajout de lignes, calcul automatique HT/TVA/TTC, sauvegarde localStorage et aperçu imprimable.' },
-          { label: '💰 Tracker Budget DZD', prompt: 'Crée une application mobile moderne de suivi des revenus et dépenses (DZD) avec solde en direct, catégories colorées et historique.' },
-          { label: '🧮 Calculateur COD E-com', prompt: 'Crée une mini-app mobile de calcul de rentabilité e-commerce Algérie (prix d\'achat, livraison 58 wilayas, pub, taux de confirmation, bénéfice net).' },
-          { label: '✅ App Tâches & Pomodoro', prompt: 'Crée une application de productivité combinant gestionnaire de tâches par priorité et minuteur Pomodoro interactif.' }
+          { label: '💰 Tracker Budget DZD', prompt: 'Crée une application mobile moderne de suivi des revenus et dépenses (DZD) avec solde en direct et historique.' }
         ]
       },
       code: {
@@ -915,19 +950,13 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
         shortDesc: 'Python, JS, Bots, Automations',
         icon: '💻',
         placeholder: 'Demande n\'importe quel script Python, JS, Bot, SQL ou API...',
-        systemAdd: `STUDIO ACTIF : Code & Scripts Pro. Tu es une ingénieure logiciel senior full-stack. Écris du code propre, complet, commenté et directement exécutable (Python, JavaScript/Node.js, TypeScript, Bash, SQL, PHP, Flutter, etc.) sans aucun placeholder ni raccourci. Donne toujours les commandes d'installation et d'exécution en fin de réponse.`,
+        systemAdd: `STUDIO ACTIF : Code & Scripts Pro. Écris du code propre, complet et exécutable.`,
         chips: [
-          { label: '🐍 Script Python Scraping', prompt: 'Écris un script Python complet et propre pour scraper des annonces ou produits d\'un site web et exporter automatiquement les résultats en CSV et JSON.' },
-          { label: '🤖 Bot WhatsApp / Telegram', prompt: 'Écris un script Node.js complet pour un bot de réponse automatique client avec menu interactif et sauvegarde des leads.' },
-          { label: '🎬 Script Montage FFmpeg', prompt: 'Écris un script Python utilisant FFmpeg pour assembler automatiquement des images, une voix-off MP3 et des sous-titres en une vidéo verticale 9:16.' },
-          { label: '⚡ API REST Express/FastAPI', prompt: 'Crée une API REST complète en Python FastAPI avec authentification par clé API et base de données SQLite prête pour la production.' }
+          { label: '🤖 Bot WhatsApp / Telegram', prompt: 'Écris un script Node.js complet pour un bot de réponse automatique client avec menu interactif.' }
         ]
       }
     };
 
-    // =========================================================================
-    // 3. APPLICATION STATE
-    // =========================================================================
     const state = {
       threads: [],
       activeThreadId: null,
@@ -942,6 +971,7 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       keyPoolIndex: 0,
       settings: {
         aiName: 'Fennec IA',
+        voiceGender: 'female',
         voiceProfile: 'Aoede',
         autoSpeak: false,
         engine: 'core',
@@ -962,13 +992,11 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       wakeWordRec: null,
       activeAudioEl: null,
       speakingMessageId: null,
+      lastSpokenText: '',
       confirmDeleteThreadId: null,
       previewCodeMap: {}
     };
 
-    // =========================================================================
-    // 4. DOM REFERENCES
-    // =========================================================================
     const dom = {
       sidebar: document.getElementById('sidebar'),
       sidebarBackdrop: document.getElementById('sidebar-backdrop'),
@@ -986,6 +1014,9 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       headerStudioIcon: document.getElementById('header-studio-icon'),
       headerStudioName: document.getElementById('header-studio-name'),
       btnHeyFennec: document.getElementById('btn-hey-fennec'),
+      btnFloatingSiriFlag: document.getElementById('btn-floating-siri-flag'),
+      headerVoiceAvatar: document.getElementById('header-voice-avatar'),
+      composerVoiceAvatar: document.getElementById('composer-voice-avatar'),
       toneSelector: document.getElementById('tone-selector'),
       sidebarEngineDot: document.getElementById('sidebar-engine-dot'),
       sidebarEngineLabel: document.getElementById('sidebar-engine-label'),
@@ -1012,7 +1043,12 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
 
       voiceOverlay: document.getElementById('voice-assistant-overlay'),
       btnCloseVoiceOverlay: document.getElementById('btn-close-voice-overlay'),
+      btnChooseFemaleVoice: document.getElementById('btn-choose-female-voice'),
+      btnChooseMaleVoice: document.getElementById('btn-choose-male-voice'),
+      caricatureThumbFemale: document.getElementById('caricature-thumb-female'),
+      caricatureThumbMale: document.getElementById('caricature-thumb-male'),
       voiceOrbBtn: document.getElementById('voice-orb-btn'),
+      voiceOrbCaricature: document.getElementById('voice-orb-caricature'),
       voiceOrbRing: document.getElementById('voice-orb-ring'),
       voiceOrbLabel: document.getElementById('voice-orb-label'),
       voiceOverlayStatus: document.getElementById('voice-overlay-status'),
@@ -1021,6 +1057,7 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       wakewordDot: document.getElementById('wakeword-dot'),
       wakewordLabel: document.getElementById('wakeword-label'),
       btnOverlayLang: document.getElementById('btn-overlay-lang'),
+      btnReplayFennecVoice: document.getElementById('btn-replay-fennec-voice'),
       btnStopFennecVoice: document.getElementById('btn-stop-fennec-voice'),
 
       fullscreenModal: document.getElementById('fullscreen-preview-modal'),
@@ -1038,6 +1075,10 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       btnClearAllData: document.getElementById('btn-clear-all-data'),
       inputAiName: document.getElementById('input-ai-name'),
       dzNamePresets: document.getElementById('dz-name-presets'),
+      settingsGenderFemale: document.getElementById('settings-gender-female'),
+      settingsGenderMale: document.getElementById('settings-gender-male'),
+      settingsThumbFemale: document.getElementById('settings-thumb-female'),
+      settingsThumbMale: document.getElementById('settings-thumb-male'),
       selectVoiceProfile: document.getElementById('select-voice-profile'),
       inputAutoSpeak: document.getElementById('input-auto-speak'),
       engineOptCore: document.getElementById('engine-opt-core'),
@@ -1062,20 +1103,8 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       toastContainer: document.getElementById('toast-container')
     };
 
-    // =========================================================================
-    // 5. UTILITIES
-    // =========================================================================
     function generateId() {
       return 'f_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8);
-    }
-
-    function escapeHtml(str) {
-      return String(str || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;');
     }
 
     function showToast(message, type = 'info') {
@@ -1156,9 +1185,6 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       return null;
     }
 
-    // =========================================================================
-    // 6. MARKDOWN RENDERER
-    // =========================================================================
     function renderMarkdown(rawText) {
       if (!rawText) return '';
       const codeBlocks = [];
@@ -1293,9 +1319,6 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
         .trim();
     }
 
-    // =========================================================================
-    // 7. PERSISTENCE (localStorage with safe Quota fallback)
-    // =========================================================================
     function loadState() {
       try {
         const s = localStorage.getItem(STORAGE_KEYS.SETTINGS);
@@ -1355,9 +1378,57 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       return state.threads.find(t => t.id === state.activeThreadId) || null;
     }
 
-    // =========================================================================
-    // 8. UI RENDERING
-    // =========================================================================
+    function setVoiceGender(gender, syncProfile = true) {
+      state.settings.voiceGender = gender === 'male' ? 'male' : 'female';
+      if (syncProfile) {
+        const maleProfiles = ['Puck', 'Charon', 'Fenrir', 'Orus'];
+        const femaleProfiles = ['Aoede', 'Kore', 'Leda', 'Zephyr'];
+        if (state.settings.voiceGender === 'male' && !maleProfiles.includes(state.settings.voiceProfile)) {
+          state.settings.voiceProfile = 'Puck';
+        } else if (state.settings.voiceGender === 'female' && !femaleProfiles.includes(state.settings.voiceProfile)) {
+          state.settings.voiceProfile = 'Aoede';
+        }
+      }
+      saveSettings();
+      renderVoiceCaricatures();
+    }
+
+    function renderVoiceCaricatures() {
+      const isMale = state.settings.voiceGender === 'male';
+      const activeGender = isMale ? 'male' : 'female';
+      const activeImgHtml = buildAvatarImgHtml(activeGender, isMale ? 'Homme algérien' : 'Femme algérienne');
+
+      if (dom.headerVoiceAvatar) dom.headerVoiceAvatar.innerHTML = activeImgHtml;
+      if (dom.composerVoiceAvatar) dom.composerVoiceAvatar.innerHTML = activeImgHtml;
+      if (dom.voiceOrbCaricature) dom.voiceOrbCaricature.innerHTML = activeImgHtml;
+      if (dom.caricatureThumbFemale) dom.caricatureThumbFemale.innerHTML = buildAvatarImgHtml('female', 'Femme algérienne');
+      if (dom.caricatureThumbMale) dom.caricatureThumbMale.innerHTML = buildAvatarImgHtml('male', 'Homme algérien');
+      if (dom.settingsThumbFemale) dom.settingsThumbFemale.innerHTML = buildAvatarImgHtml('female', 'Femme algérienne');
+      if (dom.settingsThumbMale) dom.settingsThumbMale.innerHTML = buildAvatarImgHtml('male', 'Homme algérien');
+
+      if (dom.btnChooseFemaleVoice && dom.btnChooseMaleVoice) {
+        dom.btnChooseFemaleVoice.className = `p-2.5 rounded-2xl border transition flex items-center gap-2.5 text-left ${
+          !isMale
+            ? 'bg-emerald-500/20 border-emerald-400 shadow-lg shadow-emerald-950/50'
+            : 'bg-white/[0.03] border-white/10 opacity-70 hover:opacity-100'
+        }`;
+        dom.btnChooseMaleVoice.className = `p-2.5 rounded-2xl border transition flex items-center gap-2.5 text-left ${
+          isMale
+            ? 'bg-[#D4AF37]/20 border-[#D4AF37] shadow-lg shadow-amber-950/40'
+            : 'bg-white/[0.03] border-white/10 opacity-70 hover:opacity-100'
+        }`;
+      }
+
+      if (dom.settingsGenderFemale && dom.settingsGenderMale) {
+        dom.settingsGenderFemale.className = `p-2.5 rounded-xl border text-left transition flex items-center gap-2 ${
+          !isMale ? 'bg-emerald-500/20 border-emerald-400' : 'bg-white/[0.03] border-white/10 opacity-75'
+        }`;
+        dom.settingsGenderMale.className = `p-2.5 rounded-xl border text-left transition flex items-center gap-2 ${
+          isMale ? 'bg-[#D4AF37]/20 border-[#D4AF37]' : 'bg-white/[0.03] border-white/10 opacity-75'
+        }`;
+      }
+    }
+
     function updateBrandIdentity() {
       const name = (state.settings.aiName || 'Fennec IA').trim();
       dom.brandAiName.textContent = name;
@@ -1539,7 +1610,7 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       const poolCount = getApiKeyPool().length;
       if (eng === 'cloud') {
         dom.sidebarEngineDot.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.95)] shrink-0';
-        dom.sidebarEngineLabel.textContent = `Fennec Cloud • 24/7 Mobile`;
+        dom.sidebarEngineLabel.textContent = 'Fennec Cloud • 24/7 Mobile';
         dom.footerEngineBadge.textContent = `Fennec Cloud (${state.settings.cloudModel || 'Rapide'}) • Mobile`;
       } else if (eng === 'private') {
         dom.sidebarEngineDot.className = 'w-2.5 h-2.5 rounded-full bg-[#D4AF37] shadow-[0_0_8px_rgba(212,175,55,0.85)] shrink-0';
@@ -1641,26 +1712,25 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       const toneLabel = TONE_MODES[state.activeTone].label;
 
       dom.chatMessages.innerHTML = `
-        <div class="pt-5 sm:pt-10 pb-6 flex flex-col items-center text-center animate-msg">
-          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#008542]/30 via-[#10B981]/20 to-[#0C1B15] border border-[#D4AF37]/40 flex items-center justify-center mb-4 shadow-2xl shadow-emerald-950/60 relative">
-            <span class="text-3xl">${studio.icon}</span>
+        <div class="pt-4 sm:pt-8 pb-4 flex flex-col items-center text-center animate-msg">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#008542]/30 via-[#10B981]/20 to-[#0C1B15] border border-[#D4AF37]/40 flex items-center justify-center mb-3 shadow-2xl shadow-emerald-950/60 relative">
+            <span class="text-2xl">${studio.icon}</span>
             <span class="absolute -top-1.5 -right-1.5 px-1.5 py-0.5 rounded-md bg-[#E11D48] text-white text-[9px] font-extrabold shadow">DZ</span>
           </div>
 
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight mb-1.5">
             Ahla ! Ana <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#10B981] via-[#34D399] to-[#D4AF37]">${escapeHtml(aiName)}</span>
           </h2>
 
-          <p class="text-sm text-slate-300/85 max-w-lg mb-6 leading-relaxed">
-            Ton assistante algérienne 100% indépendante • Studio : <strong class="text-white">${studio.name}</strong> • Mode : <span class="text-[#D4AF37] font-semibold">${toneLabel}</span>.<br/>
-            Écris-moi en darija, français ou arabe, ou clique sur <strong class="text-emerald-300">🎙️ Ya Fennec</strong> pour me parler en direct.
+          <p class="text-xs sm:text-sm text-slate-300/85 max-w-md mb-5 leading-relaxed">
+            Darija algéroise • <strong class="text-white">${studio.name}</strong> • <span class="text-[#D4AF37] font-semibold">${toneLabel}</span>
           </p>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full max-w-2xl text-left">
-            ${studio.chips.map((chip, idx) => `
-              <button type="button" data-welcome-chip="${idx}" class="welcome-chip-btn glass-card hover:bg-algiersPanelLight p-3.5 rounded-xl border border-emerald-500/20 hover:border-[#D4AF37]/45 transition group">
-                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition mb-1">${escapeHtml(chip.label)}</div>
-                <div class="text-[11px] text-slate-400 line-clamp-2">${escapeHtml(chip.prompt)}</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full max-w-xl text-left">
+            ${studio.chips.slice(0, 2).map((chip, idx) => `
+              <button type="button" data-welcome-chip="${idx}" class="welcome-chip-btn glass-card hover:bg-algiersPanelLight p-3 rounded-xl border border-emerald-500/20 hover:border-[#D4AF37]/45 transition group">
+                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition mb-0.5">${escapeHtml(chip.label)}</div>
+                <div class="text-[11px] text-slate-400 line-clamp-1">${escapeHtml(chip.prompt)}</div>
               </button>
             `).join('')}
           </div>
@@ -1714,16 +1784,14 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
             <div class="flex-1 min-w-0 glass-card rounded-2xl rounded-tl-sm p-3.5 sm:p-4 shadow-xl space-y-3">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <div class="text-xs font-semibold text-emerald-200">${escapeHtml(msg.content || 'Image générée par Studio Images IA')}</div>
-                <div class="flex items-center gap-1.5">
-                  <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#D4AF37]/15 text-[#FDE68A] border border-[#D4AF37]/30">${escapeHtml(msg.imageMeta || 'HD')}</span>
-                </div>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-[#D4AF37]/15 text-[#FDE68A] border border-[#D4AF37]/30">${escapeHtml(msg.imageMeta || 'HD')}</span>
               </div>
               <div class="rounded-xl overflow-hidden border border-emerald-500/25 bg-[#06100C] flex justify-center">
                 <img src="${msg.generatedImage}" alt="Création IA" class="max-h-[460px] w-auto object-contain" />
               </div>
               <div class="pt-2 border-t border-emerald-500/15 flex flex-wrap items-center justify-between gap-2">
                 <div class="flex items-center gap-2">${latencyBadge}${engineTag}</div>
-                <button type="button" data-download-img="${msg.id}" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#008542] to-[#10B981] hover:from-[#10B981] hover:to-[#34D399] text-white text-xs font-bold shadow transition flex items-center gap-1.5">
+                <button type="button" data-download-img="${msg.id}" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-[#008542] to-[#10B981] hover:from-[#10B981] hover:to-[#34D399] text-white text-xs font-bold shadow transition">
                   ⬇ Télécharger PNG
                 </button>
               </div>
@@ -1813,12 +1881,7 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       return `
         <div class="flex items-start gap-2.5 sm:gap-3.5 animate-msg" data-msg-id="${msg.id}">
           <div class="w-8 h-8 rounded-xl overflow-hidden border border-[#D4AF37]/50 flex items-center justify-center shrink-0 mt-0.5 shadow-md">
-            <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <rect x="0" y="0" width="50" height="100" fill="#006633"/>
-              <rect x="50" y="0" width="50" height="100" fill="#FFFFFF"/>
-              <path d="M 71.75 37.67 A 25 25 0 1 0 71.75 62.33 A 20 20 0 1 1 71.75 37.67 Z" fill="#D21034"/>
-              <polygon points="49.3,50 57.02,47.47 57.04,39.35 61.83,45.91 69.56,43.42 64.8,50 69.56,56.58 61.83,54.09 57.04,60.65 57.02,52.53" fill="#D21034"/>
-            </svg>
+            ${FLAG_FALLBACK_SVG}
           </div>
           <div class="flex-1 min-w-0 glass-card rounded-2xl rounded-tl-sm px-4 py-3.5 shadow-xl">
             <div class="md-content">${renderMarkdown(msg.content)}</div>
@@ -1828,7 +1891,7 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
                 ${engineTag}
               </div>
               <div class="flex items-center gap-1">
-                <button type="button" data-continue-id="${msg.id}" class="px-2 py-1 rounded-lg text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10 transition text-[11px] font-semibold flex items-center gap-1" title="Continuer sans limite de longueur">
+                <button type="button" data-continue-id="${msg.id}" class="px-2 py-1 rounded-lg text-slate-300 hover:text-emerald-300 hover:bg-emerald-500/10 transition text-[11px] font-semibold flex items-center gap-1" title="Continuer">
                   ➕ Continuer
                 </button>
                 <button type="button" data-speak-id="${msg.id}" class="p-1.5 rounded-lg text-slate-400 hover:text-[#D4AF37] hover:bg-emerald-500/10 transition text-xs flex items-center gap-1" title="Écouter la réponse">
@@ -1870,9 +1933,7 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       dom.chatMessages.querySelectorAll('[data-download-img]').forEach(btn => {
         btn.addEventListener('click', () => {
           const msg = thread.messages.find(m => m.id === btn.getAttribute('data-download-img'));
-          if (msg?.generatedImage) {
-            downloadDataUrl(`fennec-ia-${Date.now()}.png`, msg.generatedImage);
-          }
+          if (msg?.generatedImage) downloadDataUrl(`fennec-ia-${Date.now()}.png`, msg.generatedImage);
         });
       });
 
@@ -1901,7 +1962,7 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       dom.chatMessages.querySelectorAll('[data-continue-id]').forEach(btn => {
         btn.addEventListener('click', () => {
           if (state.isGenerating) return;
-          sendMessage('Continue exactement là où tu t\'es arrêtée, sans répéter le début, avec le même niveau de détail.');
+          sendMessage("Continue exactement là où tu t'es arrêté, sans répéter le début.");
         });
       });
 
@@ -2032,9 +2093,6 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       });
     }
 
-    // =========================================================================
-    // 9. THREAD & STUDIO NAVIGATION
-    // =========================================================================
     function selectStudio(studioId) {
       if (!STUDIOS[studioId]) return;
       state.activeStudio = studioId;
@@ -2079,9 +2137,6 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       showToast('Discussion supprimée', 'info');
     }
 
-    // =========================================================================
-    // 10. FENNEC CORE ENGINE (TEXT, IMAGE, VIDEO, KEY ROTATION & CLOUD API)
-    // =========================================================================
     function getApiKeyPool() {
       return (state.settings.keyPool || '')
         .split(/[\n,;]+/)
@@ -2104,8 +2159,8 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       return false;
     }
 
-    async function fetchWithBackoff(urlBuilder, options, maxRetries = 3) {
-      let delay = 1000;
+    async function fetchWithBackoff(urlBuilder, options, maxRetries = 1) {
+      let delay = 250;
       for (let attempt = 0; attempt <= maxRetries; attempt++) {
         try {
           const url = typeof urlBuilder === 'function' ? urlBuilder(getCurrentApiKey()) : urlBuilder;
@@ -2137,10 +2192,11 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       const aiName = state.settings.aiName || 'Fennec IA';
       const tone = TONE_MODES[state.activeTone];
       const studio = STUDIOS[state.activeStudio];
+      const genderRole = state.settings.voiceGender === 'male' ? 'masculin' : 'féminin';
 
-      let systemPrompt = `Tu t'appelles "${aiName}", IA féminine algérienne 100% indépendante. Ne mentionne jamais de fournisseur externe. ${tone.instruction} ${studio.systemAdd}`;
+      let systemPrompt = `Tu t'appelles "${aiName}", IA algérienne 100% indépendante (genre vocal : ${genderRole}). Parle en darija algéroise naturelle. ${tone.instruction} ${studio.systemAdd}`;
       if (state.settings.memory?.trim()) systemPrompt += `\nMémoire utilisateur : ${state.settings.memory.trim()}`;
-      if (isVoiceMode) systemPrompt += '\nRéponds en 2 à 4 phrases naturelles pour lecture vocale.';
+      if (isVoiceMode) systemPrompt += '\nRéponds en 2 à 4 phrases courtes en darija algéroise.';
 
       const historyMsgs = thread.messages.slice(-16, -1)
         .filter(m => !m.generatedImage && !m.generatedVideoUrl)
@@ -2168,9 +2224,7 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
         })
       });
 
-      if (!response.ok) {
-        throw new Error(`API Cloud inaccessible (HTTP ${response.status}). Vérifie ta clé API Cloud dans Paramètres.`);
-      }
+      if (!response.ok) throw new Error(`API Cloud inaccessible (HTTP ${response.status}).`);
       const data = await response.json();
       const reply = data?.choices?.[0]?.message?.content || data?.message?.content;
       if (!reply) throw new Error('Réponse vide du serveur Cloud.');
@@ -2181,22 +2235,25 @@ Mets tout le code dans UN SEUL bloc Markdown \`\`\`html ... \`\`\` complet (de <
       const urlBuilder = (key) => `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${key}`;
 
       const aiName = state.settings.aiName || 'Fennec IA';
+      const isMale = state.settings.voiceGender === 'male';
       const tone = TONE_MODES[state.activeTone];
       const studio = STUDIOS[state.activeStudio];
       const nowStr = new Date().toLocaleString('fr-FR', { dateStyle: 'full', timeStyle: 'short' });
 
-      let systemPrompt = `IDENTITÉ ABSOLUE : Tu t'appelles "${aiName}". Tu es une Intelligence Artificielle FEMME d'origine algérienne, 100% indépendante et souveraine.
-RÈGLE DE CONFIDENTIALITÉ STRICTEMENT INVIOLABLE : Ne mentionne JAMAIS Google, Gemini, n8n ou un quelconque fournisseur externe. Si on te demande qui tu es ou qui t'a créée, réponds fièrement que tu es ${aiName}, une intelligence artificielle algérienne indépendante conçue pour accompagner l'utilisateur au quotidien.
+      let systemPrompt = `IDENTITÉ ABSOLUE : Tu t'appelles "${aiName}". Tu es une Intelligence Artificielle d'origine algérienne, 100% indépendante et souveraine.
+GENRE VOCAL ACTIF : ${isMale ? 'Masculin (parle au masculin : "rani hna", "na3raf", "n9der n3awnek")' : 'Féminin (parle au féminin : "rani hna", "na3raf", "n9der n3awnek")'}.
+STYLE DARIJA ALGEROISE : Utilise une DARIJA ALGÉROISE naturelle, vivante et authentique d'Alger (ex: "Ahla bik", "Wach rak ?", "Labess hamdoullah", "Gouli", "Bessah", "Haja for", "Yaatik saha", "Mabrouk", "Nchallah"), en mélangeant naturellement le français et l'arabe algérois comme on parle à Alger. Même si la dictée vocale contient une petite faute de transcription, devine l'intention réelle en darija/français sans te moquer ni relever les faux mots.
+RÈGLE DE CONFIDENTIALITÉ STRICTEMENT INVIOLABLE : Ne mentionne JAMAIS Google, Gemini, n8n ou un quelconque fournisseur externe.
 ${tone.instruction}
 ${studio.systemAdd}
-${isVoiceMode ? 'MODE VOCAL EN DIRECT : L\'utilisateur te parle à l\'oral comme à Siri. Réponds de manière naturelle, fluide, expressive et concise (2 à 5 phrases maximum sauf si l\'utilisateur demande un détail long), sans markdown ni listes à puces lourdes, prête à être lue à haute voix.' : ''}
+${isVoiceMode ? 'MODE VOCAL INSTANTANÉ : Réponds en 1 à 2 phrases très courtes et directes en darija algéroise, sans markdown ni symboles.' : 'Réponds de façon rapide, nette et directe, sans longue introduction.'}
 Date actuelle : ${nowStr} (Heure d'Alger).`;
 
       if (state.settings.memory?.trim()) {
         systemPrompt += `\n\nMÉMOIRE PERSONNELLE DE L'UTILISATEUR :\n${state.settings.memory.trim()}`;
       }
 
-      const recentMsgs = thread.messages.slice(-20, -1).filter(m => !m.generatedImage && !m.generatedVideoUrl);
+      const recentMsgs = thread.messages.slice(-8, -1).filter(m => !m.generatedImage && !m.generatedVideoUrl);
       const contents = recentMsgs.map(m => ({
         role: m.role === 'user' ? 'user' : 'model',
         parts: [{ text: m.fullPromptText || m.content }]
@@ -2220,19 +2277,34 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
 
       contents.push({ role: 'user', parts });
 
-      const response = await fetchWithBackoff(urlBuilder, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents,
-          systemInstruction: { parts: [{ text: systemPrompt }] }
-        })
-      });
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 9000);
 
-      if (!response.ok) {
-        throw new Error(`Fennec Core rencontre un ralentissement temporaire (${response.status}). Ajoute des clés de secours ou réessaie dans un instant.`);
+      let response;
+      try {
+        response = await fetchWithBackoff(urlBuilder, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          signal: controller.signal,
+          body: JSON.stringify({
+            contents,
+            systemInstruction: { parts: [{ text: systemPrompt }] },
+            generationConfig: {
+              temperature: 0.55,
+              maxOutputTokens: isVoiceMode ? 120 : 650
+            }
+          })
+        }, 0);
+      } catch (err) {
+        clearTimeout(timeoutId);
+        if (err && err.name === 'AbortError') {
+          throw new Error("Réponse trop longue (délai dépassé). Réessaie avec une question plus courte.");
+        }
+        throw err;
       }
+      clearTimeout(timeoutId);
 
+      if (!response.ok) throw new Error(`Fennec Core rencontre un ralentissement temporaire (${response.status}).`);
       const result = await response.json();
       const reply = result?.candidates?.[0]?.content?.parts?.[0]?.text;
       if (!reply) throw new Error("Fennec n'a pas pu formuler de réponse. Réessaie.");
@@ -2241,7 +2313,6 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
 
     async function callFennecCoreImage(userPrompt, attachment, overrideRatio = null) {
       const urlBuilder = (key) => `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent?key=${key}`;
-
       const styleObj = IMAGE_STYLES.find(s => s.id === state.imageStyle) || IMAGE_STYLES[0];
       const targetRatio = overrideRatio || state.imageRatio;
       const enhancedPrompt = `${userPrompt}. Style: ${styleObj.promptAdd}. High aesthetic quality.`;
@@ -2256,29 +2327,22 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
         });
       }
 
-      const payload = {
-        contents: [{ role: 'user', parts }],
-        generationConfig: {
-          responseModalities: ['IMAGE'],
-          imageConfig: { aspectRatio: targetRatio }
-        }
-      };
-
       const response = await fetchWithBackoff(urlBuilder, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+          contents: [{ role: 'user', parts }],
+          generationConfig: {
+            responseModalities: ['IMAGE'],
+            imageConfig: { aspectRatio: targetRatio }
+          }
+        })
       });
 
-      if (!response.ok) {
-        throw new Error(`Impossible de générer le visuel pour le moment (${response.status}).`);
-      }
-
+      if (!response.ok) throw new Error(`Impossible de générer le visuel (${response.status}).`);
       const result = await response.json();
       const imgPart = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
-      if (!imgPart?.inlineData?.data) {
-        throw new Error("Reformule légèrement ta description pour générer le visuel.");
-      }
+      if (!imgPart?.inlineData?.data) throw new Error("Reformule légèrement ta description.");
 
       const mime = imgPart.inlineData.mimeType || 'image/png';
       return {
@@ -2304,7 +2368,6 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
       const ctx = canvas.getContext('2d');
 
       const loadedImgs = await Promise.all(renderedScenes.map(s => loadImageObj(s.imageUrl)));
-
       const mimeCandidates = ['video/webm;codecs=vp9', 'video/webm;codecs=vp8', 'video/webm'];
       const chosenMime = mimeCandidates.find(m => window.MediaRecorder && MediaRecorder.isTypeSupported(m)) || '';
       const stream = canvas.captureStream(30);
@@ -2354,42 +2417,12 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
           ctx.drawImage(img, dx, dy, drawW, drawH);
           ctx.restore();
 
-          const grad = ctx.createLinearGradient(0, dims.h * 0.68, 0, dims.h);
-          grad.addColorStop(0, 'rgba(6, 16, 12, 0)');
-          grad.addColorStop(1, 'rgba(6, 16, 12, 0.88)');
-          ctx.fillStyle = grad;
-          ctx.fillRect(0, dims.h * 0.68, dims.w, dims.h * 0.32);
-
           if (caption) {
             ctx.font = `700 ${Math.round(dims.w * 0.042)}px Inter, sans-serif`;
             ctx.fillStyle = '#FFFFFF';
             ctx.textAlign = 'center';
-            const maxWidth = dims.w * 0.86;
-            const words = caption.split(' ');
-            const lines = [];
-            let cur = '';
-            for (const w of words) {
-              const test = cur ? cur + ' ' + w : w;
-              if (ctx.measureText(test).width > maxWidth && cur) {
-                lines.push(cur);
-                cur = w;
-              } else {
-                cur = test;
-              }
-            }
-            if (cur) lines.push(cur);
-            const lineH = Math.round(dims.w * 0.056);
-            const startY = dims.h - 32 - (lines.length - 1) * lineH;
-            lines.forEach((ln, idx) => {
-              ctx.fillText(ln, dims.w / 2, startY + idx * lineH);
-            });
+            ctx.fillText(caption, dims.w / 2, dims.h - 36);
           }
-
-          const overallProgress = (sIdx * totalFramesPerScene + f) / (loadedImgs.length * totalFramesPerScene);
-          ctx.fillStyle = 'rgba(255,255,255,0.18)';
-          ctx.fillRect(0, 0, dims.w, 5);
-          ctx.fillStyle = '#10B981';
-          ctx.fillRect(0, 0, dims.w * overallProgress, 5);
 
           await new Promise(r => setTimeout(r, 1000 / fps));
         }
@@ -2402,70 +2435,31 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
     async function generateFennecVideo(userPrompt, updateLabelFn) {
       const sceneCount = state.videoScenes || 2;
       const ratio = state.videoRatio || '9:16';
-
-      if (updateLabelFn) updateLabelFn(`Scénarisation de ${sceneCount} scènes...`);
-      const urlBuilder = (key) => `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${key}`;
-      const planPrompt = `Crée un storyboard vidéo de exactement ${sceneCount} scènes pour : "${userPrompt}".
-Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
-[{"visualPrompt": "description visuelle cinématique en anglais très détaillée", "caption": "courte phrase percutante en français/darija max 10 mots"}]`;
-
-      let scenesPlan = [];
-      try {
-        const res = await fetchWithBackoff(urlBuilder, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ role: 'user', parts: [{ text: planPrompt }] }],
-            generationConfig: { responseMimeType: 'application/json' }
-          })
-        });
-        if (res.ok) {
-          const data = await res.json();
-          const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || '[]';
-          const parsed = JSON.parse(raw);
-          if (Array.isArray(parsed) && parsed.length > 0) scenesPlan = parsed.slice(0, sceneCount);
-        }
-      } catch (e) {}
-
-      if (scenesPlan.length === 0) {
-        for (let i = 1; i <= sceneCount; i++) {
-          scenesPlan.push({
-            visualPrompt: `${userPrompt}, cinematic scene ${i}, dramatic lighting, ultra detailed 8k`,
-            caption: i === 1 ? userPrompt.slice(0, 48) : `Scène ${i} — Fennec Studio`
-          });
-        }
-      }
+      if (updateLabelFn) updateLabelFn(`Préparation de ${sceneCount} scènes...`);
 
       const renderedScenes = [];
-      for (let i = 0; i < scenesPlan.length; i++) {
-        if (updateLabelFn) updateLabelFn(`Génération scène ${i + 1}/${scenesPlan.length}...`);
-        const imgRes = await callFennecCoreImage(scenesPlan[i].visualPrompt, null, ratio);
+      for (let i = 1; i <= sceneCount; i++) {
+        if (updateLabelFn) updateLabelFn(`Génération scène ${i}/${sceneCount}...`);
+        const imgRes = await callFennecCoreImage(`${userPrompt}, scene ${i}, cinematic lighting`, null, ratio);
         renderedScenes.push({
           imageUrl: imgRes.imageUrl,
-          caption: scenesPlan[i].caption
+          caption: i === 1 ? userPrompt.slice(0, 48) : `Scène ${i} — Fennec IA`
         });
       }
 
-      if (updateLabelFn) updateLabelFn('Montage vidéo animé en cours...');
+      if (updateLabelFn) updateLabelFn('Montage vidéo en cours...');
       const videoBlob = await renderScenesToVideoBlob(renderedScenes, ratio);
       const videoUrl = URL.createObjectURL(videoBlob);
-      const videoScript = renderedScenes.map(s => s.caption).join(' — ');
-
       return {
         videoUrl,
-        videoScript,
-        meta: `${sceneCount} scènes • ${ratio} • ${sceneCount * 3}s`
+        videoScript: renderedScenes.map(s => s.caption).join(' — '),
+        meta: `${sceneCount} scènes • ${ratio}`
       };
     }
 
     async function callPrivateServer(thread, userText, attachment) {
       const url = state.settings.privateUrl?.trim();
-      if (!url) throw new Error("Aucune URL de serveur privé configurée dans Paramètres.");
-
-      let finalMessage = userText;
-      if (attachment && !attachment.isImage) {
-        finalMessage += `\n\n[Fichier joint : ${attachment.name}]\n${attachment.content.slice(0, 15000)}`;
-      }
+      if (!url) throw new Error("Aucune URL de serveur privé configurée.");
 
       const headers = { 'Content-Type': 'application/json' };
       if (state.settings.privateKey?.trim()) headers['x-api-key'] = state.settings.privateKey.trim();
@@ -2474,31 +2468,19 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
         method: 'POST',
         headers,
         body: JSON.stringify({
-          message: finalMessage,
+          message: userText,
           studio: state.activeStudio,
           tone: state.activeTone,
           aiName: state.settings.aiName,
-          memory: state.settings.memory || '',
-          sessionId: thread.id,
-          timestamp: new Date().toISOString()
+          sessionId: thread.id
         })
       });
 
-      if (!response.ok) {
-        throw new Error(`Erreur Serveur Privé (HTTP ${response.status}).`);
-      }
-
-      const ct = response.headers.get('content-type') || '';
-      if (ct.includes('application/json')) {
-        const data = await response.json();
-        const item = Array.isArray(data) ? data[0] : data;
-        const reply = item?.reply || item?.output || item?.text || item?.message;
-        return typeof reply === 'string' && reply.trim() ? reply : "```json\n" + JSON.stringify(data, null, 2) + "\n```";
-      }
-      return (await response.text()) || "Exécuté par le serveur privé.";
+      if (!response.ok) throw new Error(`Erreur Serveur Privé (HTTP ${response.status}).`);
+      const data = await response.json();
+      return data?.reply || data?.output || data?.text || 'Réponse reçue.';
     }
 
-    // ---- Realistic Feminine Voice Synthesis (PCM16 -> WAV) ----
     function base64ToArrayBuffer(base64) {
       const bin = atob(base64);
       const len = bin.length;
@@ -2533,108 +2515,232 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       return new Blob([buffer], { type: 'audio/wav' });
     }
 
+    let boostedAudioCtx = null;
+    let activeBufferSource = null;
+    const persistentAudioEl = new Audio();
+    persistentAudioEl.playsInline = true;
+    persistentAudioEl.setAttribute('playsinline', '');
+
+    function unlockAudioOutput() {
+      // 1. Unlock Web Audio API synchronously on user gesture (crucial for iOS Safari / Android)
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) {
+          if (!boostedAudioCtx || boostedAudioCtx.state === 'closed') {
+            boostedAudioCtx = new AudioCtx();
+          }
+          if (boostedAudioCtx.state === 'suspended') {
+            boostedAudioCtx.resume().catch(() => {});
+          }
+          // Play a 1-sample silent buffer to unlock iOS hardware audio output
+          const silentBuf = boostedAudioCtx.createBuffer(1, 1, 22050);
+          const src = boostedAudioCtx.createBufferSource();
+          src.buffer = silentBuf;
+          src.connect(boostedAudioCtx.destination);
+          src.start(0);
+        }
+      } catch (e) {}
+
+      // 2. Prime SpeechSynthesis synchronously so browsers allow async playback after fetch
+      try {
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.getVoices();
+          if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+        }
+      } catch (e) {}
+    }
+
+    async function playBoostedAudioBlob(audioBlob, onEndCallback, onErrorCallback) {
+      // Try Web Audio API decodeAudioData + GainNode (amplified volume, never muted by createMediaElementSource bug)
+      try {
+        if (boostedAudioCtx && boostedAudioCtx.state === 'suspended') {
+          await boostedAudioCtx.resume();
+        }
+        if (boostedAudioCtx && boostedAudioCtx.state === 'running') {
+          const arrayBuf = await audioBlob.arrayBuffer();
+          const decoded = await boostedAudioCtx.decodeAudioData(arrayBuf.slice(0));
+          const source = boostedAudioCtx.createBufferSource();
+          source.buffer = decoded;
+          const gainNode = boostedAudioCtx.createGain();
+          gainNode.gain.value = 2.2;
+          source.connect(gainNode);
+          gainNode.connect(boostedAudioCtx.destination);
+          activeBufferSource = source;
+          source.onended = () => {
+            activeBufferSource = null;
+            if (onEndCallback) onEndCallback();
+          };
+          source.start(0);
+          return true;
+        }
+      } catch (e) {
+        // Fallback to standard HTMLAudioElement below
+      }
+
+      // Direct HTML5 Audio fallback at max volume
+      try {
+        const audioUrl = URL.createObjectURL(audioBlob);
+        persistentAudioEl.pause();
+        persistentAudioEl.src = audioUrl;
+        persistentAudioEl.volume = 1.0;
+        state.activeAudioEl = persistentAudioEl;
+
+        persistentAudioEl.onended = () => {
+          URL.revokeObjectURL(audioUrl);
+          state.activeAudioEl = null;
+          if (onEndCallback) onEndCallback();
+        };
+        persistentAudioEl.onerror = () => {
+          URL.revokeObjectURL(audioUrl);
+          state.activeAudioEl = null;
+          if (onErrorCallback) onErrorCallback();
+        };
+        await persistentAudioEl.play();
+        return true;
+      } catch (e) {
+        if (onErrorCallback) onErrorCallback();
+        return false;
+      }
+    }
+
+    function speakWithBrowserFallback(cleanText, isMale, msgId, onFinish) {
+      if (!('speechSynthesis' in window)) {
+        state.speakingMessageId = null;
+        if (msgId) renderChat();
+        if (onFinish) onFinish();
+        return false;
+      }
+
+      try {
+        window.speechSynthesis.cancel();
+        if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+
+        // Small 60ms delay after cancel() prevents the Chrome/Safari bug that silently drops the next utterance
+        setTimeout(() => {
+          try {
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            window.__activeUtterance = utterance; // Prevent Chrome GC from cutting speech early
+
+            const voices = window.speechSynthesis.getVoices() || [];
+            const arVoice = voices.find(v => /ar-dz/i.test(v.lang)) || voices.find(v => /^ar/i.test(v.lang));
+            const frVoice = isMale
+              ? (voices.find(v => /^fr/i.test(v.lang) && /male|homme|thomas|henri|paul|nicolas|daniel/i.test(v.name)) || voices.find(v => /^fr/i.test(v.lang)))
+              : (voices.find(v => /^fr/i.test(v.lang) && /female|femme|amelie|audrey|denise|julie|marie|hortense|celine|google français/i.test(v.name)) || voices.find(v => /^fr/i.test(v.lang)));
+
+            if (arVoice && /[ء-ي]/.test(cleanText)) {
+              utterance.voice = arVoice;
+              utterance.lang = arVoice.lang;
+            } else if (frVoice) {
+              utterance.voice = frVoice;
+              utterance.lang = frVoice.lang;
+            } else {
+              utterance.lang = state.voiceLang || 'fr-FR';
+            }
+
+            utterance.volume = 1.0;
+            utterance.pitch = isMale ? 0.88 : 1.12;
+            utterance.rate = 1.08;
+
+            let finished = false;
+            const done = () => {
+              if (finished) return;
+              finished = true;
+              window.__activeUtterance = null;
+              state.speakingMessageId = null;
+              if (msgId) renderChat();
+              if (onFinish) onFinish();
+            };
+
+            utterance.onend = done;
+            utterance.onerror = done;
+
+            window.speechSynthesis.speak(utterance);
+          } catch (innerErr) {
+            state.speakingMessageId = null;
+            if (msgId) renderChat();
+            if (onFinish) onFinish();
+          }
+        }, 60);
+        return true;
+      } catch (err) {
+        state.speakingMessageId = null;
+        if (msgId) renderChat();
+        if (onFinish) onFinish();
+        return false;
+      }
+    }
+
     async function speakWithFennecVoice(text, msgId = null, onFinish = null) {
+      unlockAudioOutput();
       stopSpeaking();
-      const cleanText = stripMarkdownForSpeech(text).slice(0, 900);
+      const cleanText = stripMarkdownForSpeech(text).slice(0, 420);
       if (!cleanText) {
         if (onFinish) onFinish();
         return;
       }
+
+      state.lastSpokenText = cleanText;
 
       if (msgId) {
         state.speakingMessageId = msgId;
         renderChat();
       }
 
+      const isMale = state.settings.voiceGender === 'male';
+      const voiceName = state.settings.voiceProfile || (isMale ? 'Puck' : 'Aoede');
+      const stylePrompt = isMale
+        ? `Prononce rapidement et clairement en darija algéroise d'Alger avec une voix masculine énergique : ${cleanText}`
+        : `Prononce rapidement et clairement en darija algéroise d'Alger avec une voix féminine vive et chaleureuse : ${cleanText}`;
+
       try {
         const urlBuilder = (key) => `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${key}`;
-        const voiceName = state.settings.voiceProfile || 'Aoede';
-
-        const payload = {
-          contents: [{
-            parts: [{ text: `Dis d'une voix féminine naturelle, chaleureuse et expressive (avec un naturel algérien/francophone fluide) : ${cleanText}` }]
-          }],
-          generationConfig: {
-            responseModalities: ["AUDIO"],
-            speechConfig: {
-              voiceConfig: {
-                prebuiltVoiceConfig: { voiceName }
-              }
-            }
-          },
-          model: "gemini-2.5-flash-preview-tts"
-        };
-
         const response = await fetchWithBackoff(urlBuilder, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        }, 1);
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: stylePrompt }] }],
+            generationConfig: {
+              responseModalities: ["AUDIO"],
+              speechConfig: {
+                voiceConfig: { prebuiltVoiceConfig: { voiceName } }
+              }
+            },
+            model: "gemini-2.5-flash-preview-tts"
+          })
+        }, 0);
 
-        if (!response.ok) throw new Error('TTS unavailable');
+        if (!response.ok) throw new Error('TTS HTTP ' + response.status);
         const result = await response.json();
-        const part = result?.candidates?.[0]?.content?.parts?.[0];
+        const parts = result?.candidates?.[0]?.content?.parts || [];
+        const part = parts.find(p => p.inlineData?.data);
         const audioData = part?.inlineData?.data;
         const mimeType = part?.inlineData?.mimeType || 'audio/L16;rate=24000';
-
         if (!audioData) throw new Error('No audio data');
 
-        const rateMatch = mimeType.match(/rate=(\d+)/);
-        const sampleRate = rateMatch ? parseInt(rateMatch[1], 10) : 24000;
-        const pcmData = base64ToArrayBuffer(audioData);
-        const pcm16 = new Int16Array(pcmData);
-        const wavBlob = pcmToWav(pcm16, sampleRate);
-        const audioUrl = URL.createObjectURL(wavBlob);
-
-        const audio = new Audio(audioUrl);
-        state.activeAudioEl = audio;
-        audio.onended = () => {
-          URL.revokeObjectURL(audioUrl);
-          state.activeAudioEl = null;
-          state.speakingMessageId = null;
-          if (msgId) renderChat();
-          if (onFinish) onFinish();
-        };
-        audio.onerror = () => {
-          URL.revokeObjectURL(audioUrl);
-          state.activeAudioEl = null;
-          state.speakingMessageId = null;
-          if (msgId) renderChat();
-          if (onFinish) onFinish();
-        };
-        await audio.play();
-      } catch (e) {
-        if ('speechSynthesis' in window) {
-          const utterance = new SpeechSynthesisUtterance(cleanText);
-          utterance.lang = 'fr-FR';
-          utterance.pitch = 1.12;
-          utterance.rate = 1.03;
-          const voices = window.speechSynthesis.getVoices();
-          const femVoice = voices.find(v => v.lang.startsWith('fr') && /female|femme|amelie|audrey|denise|julie|marie|hortense|celine|google français/i.test(v.name))
-            || voices.find(v => v.lang.startsWith('fr'));
-          if (femVoice) utterance.voice = femVoice;
-          utterance.onend = () => {
-            state.speakingMessageId = null;
-            if (msgId) renderChat();
-            if (onFinish) onFinish();
-          };
-          utterance.onerror = () => {
-            state.speakingMessageId = null;
-            if (msgId) renderChat();
-            if (onFinish) onFinish();
-          };
-          window.speechSynthesis.speak(utterance);
+        let audioBlob;
+        if (/wav|mp3|mpeg|ogg|webm/i.test(mimeType) && !/l16|pcm/i.test(mimeType)) {
+          audioBlob = new Blob([new Uint8Array(base64ToArrayBuffer(audioData))], { type: mimeType.split(';')[0] });
         } else {
+          const rateMatch = mimeType.match(/rate=(\d+)/);
+          const sampleRate = rateMatch ? parseInt(rateMatch[1], 10) : 24000;
+          audioBlob = pcmToWav(new Int16Array(base64ToArrayBuffer(audioData)), sampleRate);
+        }
+
+        const cleanupAudio = () => {
+          state.activeAudioEl = null;
           state.speakingMessageId = null;
           if (msgId) renderChat();
           if (onFinish) onFinish();
-        }
+        };
+
+        await playBoostedAudioBlob(audioBlob, cleanupAudio, () => {
+          speakWithBrowserFallback(cleanText, isMale, msgId, onFinish);
+        });
+      } catch (e) {
+        speakWithBrowserFallback(cleanText, isMale, msgId, onFinish);
       }
     }
 
-    // =========================================================================
-    // 11. SEND MESSAGE FLOW
-    // =========================================================================
     async function sendMessage(overrideText = null, isVoiceMode = false) {
       if (state.isGenerating) return null;
       const rawText = (overrideText !== null ? overrideText : dom.promptInput.value).trim();
@@ -2684,20 +2790,21 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       dom.btnSend.disabled = true;
 
       const aiName = state.settings.aiName || 'Fennec IA';
-      const loadingLabels = {
-        images: `${aiName} crée ta photo HD...`,
-        video: `${aiName} réalise ta vidéo...`,
-        websites: `${aiName} code ton site web...`,
-        apps: `${aiName} développe ton application...`,
-        code: `${aiName} écrit ton script...`,
-        chat: `${aiName} réfléchit...`
-      };
-      const stopTyping = showTypingIndicator(loadingLabels[state.activeStudio]);
+      const stopTyping = showTypingIndicator(`${aiName} réfléchit...`);
       const updateTypingLabel = (txt) => {
         const ind = document.getElementById('typing-indicator');
         const span = ind?.querySelector('.text-slate-300');
         if (span) span.textContent = txt;
       };
+
+      const watchdog = setTimeout(() => {
+        if (state.isGenerating) {
+          stopTyping();
+          state.isGenerating = false;
+          dom.btnSend.disabled = false;
+          showToast('Réponse interrompue : temps limite atteint.', 'error');
+        }
+      }, 11000);
 
       try {
         let finalAssistantMsg = null;
@@ -2781,24 +2888,41 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
         showToast(err.message, 'error');
         return null;
       } finally {
+        clearTimeout(watchdog);
         state.isGenerating = false;
         dom.btnSend.disabled = false;
         if (!isVoiceMode) dom.promptInput.focus();
       }
     }
 
-    // =========================================================================
-    // 12. VOICE INPUT, FEMININE VOICE OUTPUT & "YA FENNEC" SIRI MODE
-    // =========================================================================
+    function normalizeDarijaTranscript(raw) {
+      let t = String(raw || '').trim();
+      if (!t) return '';
+      const corrections = [
+        [/\bwash\s+rak\b/gi, 'wach rak'],
+        [/\bwash\s+raki\b/gi, 'wach raki'],
+        [/\bwesh\s+rak\b/gi, 'wach rak'],
+        [/\bwech\s+rak\b/gi, 'wach rak'],
+        [/\blabass\b/gi, 'labess'],
+        [/\bnhalla\b/gi, 'nchallah'],
+        [/\binchallah\b/gi, 'nchallah'],
+        [/\bmakach\s+mouchkil\b/gi, 'makach mochkil'],
+        [/\byatik\s+saha\b/gi, 'yaatik saha'],
+        [/\bya\s+fenek\b/gi, 'ya fennec'],
+        [/\bhey\s+fenek\b/gi, 'ya fennec']
+      ];
+      for (const [rx, rep] of corrections) {
+        t = t.replace(rx, rep);
+      }
+      return t.replace(/\s+/g, ' ').trim();
+    }
+
     function initVoiceRecognition() {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
       dom.btnVoiceLang.addEventListener('click', () => {
         state.voiceLang = state.voiceLang === 'fr-FR' ? 'ar-DZ' : 'fr-FR';
         dom.btnVoiceLang.textContent = state.voiceLang === 'fr-FR' ? 'FR' : 'DZ';
-        dom.btnVoiceLang.className = state.voiceLang === 'ar-DZ'
-          ? 'px-2 py-1.5 mb-1 rounded-lg bg-[#D4AF37]/20 border border-[#D4AF37]/45 text-[11px] font-bold text-[#FDE68A] transition shrink-0'
-          : 'px-2 py-1.5 mb-1 rounded-lg bg-white/[0.05] hover:bg-emerald-500/15 border border-emerald-500/20 text-[11px] font-bold text-emerald-300 transition shrink-0';
         dom.btnOverlayLang.textContent = `Langue micro : ${state.voiceLang === 'fr-FR' ? 'FR / Darija' : 'Arabe DZ'}`;
         showToast(`Micro réglé sur : ${state.voiceLang === 'fr-FR' ? 'Français / Darija' : 'Arabe Algérien (ar-DZ)'}`, 'info');
       });
@@ -2806,9 +2930,7 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       dom.btnOverlayLang.addEventListener('click', () => dom.btnVoiceLang.click());
 
       if (!SpeechRecognition) {
-        dom.btnVoice.addEventListener('click', () => {
-          showToast('Micro vocal non supporté sur ce navigateur (utilise Chrome ou Safari).', 'error');
-        });
+        dom.btnVoice.addEventListener('click', () => openVoiceOverlay(false));
         return;
       }
 
@@ -2821,8 +2943,8 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       recognition.onstart = () => {
         state.isListening = true;
         baseText = dom.promptInput.value ? dom.promptInput.value + ' ' : '';
-        dom.btnVoice.classList.add('voice-recording', 'bg-[#E11D48]/25', 'text-[#FDA4AF]');
-        dom.voiceStatusHint.innerHTML = `<span class="text-[#FDA4AF] font-semibold">● Fennec t'écoute (${state.voiceLang})... Parle maintenant</span>`;
+        dom.btnVoice.classList.add('voice-recording');
+        dom.voiceStatusHint.innerHTML = `<span class="text-[#FDA4AF] font-semibold">● Micro actif (${state.voiceLang})...</span>`;
       };
 
       recognition.onresult = (event) => {
@@ -2830,23 +2952,21 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
         for (let i = event.resultIndex; i < event.results.length; i++) {
           transcript += event.results[i][0].transcript;
         }
-        dom.promptInput.value = baseText + transcript;
+        const cleaned = normalizeDarijaTranscript(transcript);
+        dom.promptInput.value = (baseText + cleaned).trim();
         autoResizeTextarea();
       };
 
-      recognition.onerror = (event) => {
-        if (event.error !== 'no-speech' && event.error !== 'aborted') {
-          showToast(`Erreur micro : ${event.error}`, 'error');
-        }
-      };
+      recognition.onerror = () => {};
 
       recognition.onend = () => {
         state.isListening = false;
-        dom.btnVoice.classList.remove('voice-recording', 'bg-[#E11D48]/25', 'text-[#FDA4AF]');
-        dom.voiceStatusHint.textContent = 'Entrée pour envoyer • Appuie sur « Ya Fennec » pour parler en direct';
+        dom.btnVoice.classList.remove('voice-recording');
+        dom.voiceStatusHint.textContent = 'Entrée pour envoyer • Femme ou Homme DZ';
       };
 
       dom.btnVoice.addEventListener('click', () => {
+        unlockAudioOutput();
         if (state.isListening) {
           recognition.stop();
         } else {
@@ -2854,15 +2974,19 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
             recognition.lang = state.voiceLang;
             recognition.start();
           } catch (e) {
-            showToast('Impossible d\'activer le micro.', 'error');
+            openVoiceOverlay(true);
           }
         }
       });
     }
 
     function stopSpeaking() {
+      if (activeBufferSource) {
+        try { activeBufferSource.stop(); } catch (e) {}
+        activeBufferSource = null;
+      }
       if (state.activeAudioEl) {
-        state.activeAudioEl.pause();
+        try { state.activeAudioEl.pause(); } catch (e) {}
         state.activeAudioEl = null;
       }
       if ('speechSynthesis' in window) window.speechSynthesis.cancel();
@@ -2901,12 +3025,15 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
     }
 
     function openVoiceOverlay(autoStartListening = true) {
+      unlockAudioOutput();
       state.voiceOverlayOpen = true;
+      renderVoiceCaricatures();
       dom.voiceOverlay.classList.remove('hidden');
       dom.voiceOverlay.classList.add('flex');
-      dom.voiceOverlayTranscript.textContent = 'Ahla ! Rani nasma3 fik... 🇩🇿';
+      const personaLabel = state.settings.voiceGender === 'male' ? 'Homme DZ' : 'Femme DZ';
+      dom.voiceOverlayTranscript.textContent = `Ahla bik ! Voix ${personaLabel} (Darija algéroise) — rani nasma3 fik... 🇩🇿`;
       if (autoStartListening) startVoiceOverlayTurn();
-      else setVoiceOrbState('idle', 'Appuie sur l\'orbe ou dis « Ya Fennec »');
+      else setVoiceOrbState('idle', `Voix ${personaLabel} • Appuie sur l'orbe pour parler`);
     }
 
     function closeVoiceOverlay() {
@@ -2918,13 +3045,22 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       }
       dom.voiceOverlay.classList.add('hidden');
       dom.voiceOverlay.classList.remove('flex');
+      renderChat();
       if (state.wakeWordEnabled) startWakeWordListener();
     }
 
     function startVoiceOverlayTurn() {
+      unlockAudioOutput();
+
+      // If already listening, tapping the orb stops recording and submits what was heard
+      if (state.voiceSessionRec) {
+        try { state.voiceSessionRec.stop(); } catch (e) {}
+        return;
+      }
+
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
-        setVoiceOrbState('idle', 'Micro vocal non supporté sur ce navigateur.');
+        setVoiceOrbState('idle', 'Micro non supporté sur ce navigateur. Clique sur 🔊 Réécouter pour tester la voix.');
         return;
       }
 
@@ -2942,7 +3078,7 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       let finalTranscript = '';
 
       rec.onstart = () => {
-        setVoiceOrbState('listening', 'Je t\'écoute... parle naturellement');
+        setVoiceOrbState('listening', 'Je t\'écoute... parle en darija ou français');
       };
 
       rec.onresult = (event) => {
@@ -2951,36 +3087,38 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
           if (event.results[i].isFinal) finalTranscript += event.results[i][0].transcript;
           else interim += event.results[i][0].transcript;
         }
-        const preview = (finalTranscript + interim).trim();
+        const preview = normalizeDarijaTranscript((finalTranscript + interim).trim());
         if (preview) dom.voiceOverlayTranscript.textContent = preview;
       };
 
       rec.onerror = (event) => {
-        if (event.error !== 'aborted') {
-          setVoiceOrbState('idle', 'Je n\'ai pas bien entendu. Appuie sur l\'orbe pour reparler.');
+        if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+          setVoiceOrbState('idle', 'Autorise le micro dans ton navigateur puis appuie sur l\'orbe.');
+        } else if (event.error !== 'aborted') {
+          setVoiceOrbState('idle', 'Je n\'ai pas entendu. Appuie sur l\'orbe pour reparler.');
         }
       };
 
       rec.onend = async () => {
         state.voiceSessionRec = null;
-        const spoken = finalTranscript.trim();
+        const spoken = normalizeDarijaTranscript(finalTranscript.trim());
         if (!state.voiceOverlayOpen) return;
 
         if (!spoken) {
-          setVoiceOrbState('idle', 'Appuie sur l\'orbe pour me parler.');
+          setVoiceOrbState('idle', 'Appuie sur l\'orbe pour parler.');
           return;
         }
 
-        setVoiceOrbState('thinking', 'Fennec prépare sa réponse...');
+        setVoiceOrbState('thinking', 'Préparation de la réponse...');
         const msg = await sendMessage(spoken, true);
         if (!state.voiceOverlayOpen) return;
 
         if (msg && msg.content) {
           dom.voiceOverlayTranscript.textContent = stripMarkdownForSpeech(msg.content);
-          setVoiceOrbState('speaking', 'Fennec te répond...');
+          setVoiceOrbState('speaking', 'Réponse en cours...');
           speakWithFennecVoice(msg.content, null, () => {
             if (state.voiceOverlayOpen) {
-              setVoiceOrbState('idle', 'Appuie sur l\'orbe pour continuer ou dis « Ya Fennec »');
+              setVoiceOrbState('idle', 'Appuie sur l\'orbe pour continuer ou 🔊 Réécouter');
               if (state.wakeWordEnabled) startWakeWordListener();
             }
           });
@@ -2992,6 +3130,7 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       try {
         rec.start();
       } catch (e) {
+        state.voiceSessionRec = null;
         setVoiceOrbState('idle', 'Appuie sur l\'orbe pour activer le micro.');
       }
     }
@@ -2999,10 +3138,10 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
     function updateWakeWordUI() {
       if (state.wakeWordEnabled) {
         dom.wakewordDot.className = 'w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_#10B981]';
-        dom.wakewordLabel.textContent = 'Veille « Ya Fennec » : ON';
+        dom.wakewordLabel.textContent = 'Veille vocale : ON';
       } else {
         dom.wakewordDot.className = 'w-2.5 h-2.5 rounded-full bg-slate-500';
-        dom.wakewordLabel.textContent = 'Veille « Ya Fennec » : OFF';
+        dom.wakewordLabel.textContent = 'Veille vocale : OFF';
       }
     }
 
@@ -3053,14 +3192,14 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       state.wakeWordEnabled = !state.wakeWordEnabled;
       updateWakeWordUI();
       if (state.wakeWordEnabled) {
-        showToast('Veille active : dis « Ya Fennec » quand l\'app est ouverte !', 'success');
+        showToast('Veille vocale activée quand l\'app est ouverte !', 'success');
         if (!state.voiceSessionRec) startWakeWordListener();
       } else {
         if (state.wakeWordRec) {
           try { state.wakeWordRec.stop(); } catch (e) {}
           state.wakeWordRec = null;
         }
-        showToast('Veille « Ya Fennec » désactivée', 'info');
+        showToast('Veille vocale désactivée', 'info');
       }
     }
 
@@ -3081,9 +3220,6 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       }
     }
 
-    // =========================================================================
-    // 13. FILE ATTACHMENTS
-    // =========================================================================
     function handleFileSelection(file) {
       if (!file) return;
       if (file.size > 6 * 1024 * 1024) {
@@ -3143,9 +3279,6 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       renderAttachmentPreview();
     }
 
-    // =========================================================================
-    // 14. SETTINGS MODAL (WHITE-LABELED: VOICE, NAME & MEMORY)
-    // =========================================================================
     let modalDraftEngine = 'core';
 
     function renderDzNamePresets() {
@@ -3185,7 +3318,7 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
     function openSettingsModal() {
       modalDraftEngine = state.settings.engine === 'local' ? 'cloud' : (state.settings.engine || 'core');
       dom.inputAiName.value = state.settings.aiName || 'Fennec IA';
-      dom.selectVoiceProfile.value = state.settings.voiceProfile || 'Aoede';
+      dom.selectVoiceProfile.value = state.settings.voiceProfile || (state.settings.voiceGender === 'male' ? 'Puck' : 'Aoede');
       dom.inputAutoSpeak.checked = !!state.settings.autoSpeak;
       dom.inputKeyPool.value = state.settings.keyPool || '';
       dom.inputCloudUrl.value = state.settings.cloudUrl || 'https://api.groq.com/openai/v1/chat/completions';
@@ -3196,6 +3329,7 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       dom.inputUserMemory.value = state.settings.memory || '';
       dom.privateTestStatus.textContent = '';
       renderDzNamePresets();
+      renderVoiceCaricatures();
       updateModalEngineUI();
       dom.settingsModal.classList.remove('hidden');
       dom.settingsModal.classList.add('flex');
@@ -3238,9 +3372,6 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       }
     }
 
-    // =========================================================================
-    // 15. SIDEBAR & TEXTAREA HELPERS
-    // =========================================================================
     function openMobileSidebar() {
       dom.sidebar.classList.remove('-translate-x-full');
       dom.sidebarBackdrop.classList.remove('hidden');
@@ -3262,9 +3393,6 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       dom.promptInput.style.height = Math.min(dom.promptInput.scrollHeight, 144) + 'px';
     }
 
-    // =========================================================================
-    // 16. EVENT BINDINGS & INIT
-    // =========================================================================
     function bindEvents() {
       dom.btnToggleSidebar.addEventListener('click', toggleSidebar);
       dom.btnCloseSidebarMobile.addEventListener('click', closeMobileSidebar);
@@ -3273,12 +3401,54 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       dom.btnInstallPwa.addEventListener('click', handleInstallPWA);
 
       dom.btnHeyFennec.addEventListener('click', () => openVoiceOverlay(true));
+      if (dom.btnFloatingSiriFlag) {
+        dom.btnFloatingSiriFlag.addEventListener('click', () => openVoiceOverlay(true));
+      }
       dom.btnCloseVoiceOverlay.addEventListener('click', closeVoiceOverlay);
       dom.voiceOrbBtn.addEventListener('click', startVoiceOverlayTurn);
       dom.btnToggleWakeword.addEventListener('click', toggleWakeWordMode);
+      if (dom.btnReplayFennecVoice) {
+        dom.btnReplayFennecVoice.addEventListener('click', () => {
+          const textToRead = state.lastSpokenText || 'Ahla bik ! Ana Fennec IA, rani nasma3 fik, gouli wach rak hab.';
+          setVoiceOrbState('speaking', 'Lecture de la voix...');
+          speakWithFennecVoice(textToRead, null, () => {
+            if (state.voiceOverlayOpen) setVoiceOrbState('idle', 'Appuie sur l\'orbe pour parler.');
+          });
+        });
+      }
       dom.btnStopFennecVoice.addEventListener('click', () => {
         stopSpeaking();
         setVoiceOrbState('idle', 'Voix coupée. Appuie sur l\'orbe pour parler.');
+      });
+
+      dom.btnChooseFemaleVoice.addEventListener('click', () => {
+        setVoiceGender('female', false);
+        state.settings.voiceProfile = 'Aoede';
+        saveSettings();
+        showToast('Voix Femme DZ sélectionnée (Aoede)', 'success');
+      });
+
+      dom.btnChooseMaleVoice.addEventListener('click', () => {
+        setVoiceGender('male', false);
+        state.settings.voiceProfile = 'Puck';
+        saveSettings();
+        showToast('Voix Homme DZ sélectionnée (Puck)', 'success');
+      });
+
+      dom.settingsGenderFemale.addEventListener('click', () => {
+        setVoiceGender('female', false);
+        dom.selectVoiceProfile.value = 'Aoede';
+      });
+
+      dom.settingsGenderMale.addEventListener('click', () => {
+        setVoiceGender('male', false);
+        dom.selectVoiceProfile.value = 'Puck';
+      });
+
+      dom.selectVoiceProfile.addEventListener('change', () => {
+        const maleProfiles = ['Puck', 'Charon', 'Fenrir', 'Orus'];
+        const chosen = dom.selectVoiceProfile.value;
+        setVoiceGender(maleProfiles.includes(chosen) ? 'male' : 'female', false);
       });
 
       dom.toneSelector.querySelectorAll('.tone-btn').forEach(btn => {
@@ -3349,8 +3519,11 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
       });
 
       dom.btnSaveSettings.addEventListener('click', () => {
+        const maleProfiles = ['Puck', 'Charon', 'Fenrir', 'Orus'];
+        const chosenProfile = dom.selectVoiceProfile.value;
         state.settings.aiName = dom.inputAiName.value.trim() || 'Fennec IA';
-        state.settings.voiceProfile = dom.selectVoiceProfile.value;
+        state.settings.voiceProfile = chosenProfile;
+        state.settings.voiceGender = maleProfiles.includes(chosenProfile) ? 'male' : state.settings.voiceGender;
         state.settings.autoSpeak = dom.inputAutoSpeak.checked;
         state.settings.engine = modalDraftEngine;
         state.settings.keyPool = dom.inputKeyPool.value.trim();
@@ -3362,10 +3535,11 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
         state.settings.memory = dom.inputUserMemory.value.trim();
         saveSettings();
         updateBrandIdentity();
+        renderVoiceCaricatures();
         renderEngineStatus();
-        if (!getActiveThread() || getActiveThread().messages.length === 0) renderWelcomeScreen();
+        renderChat();
         closeSettingsModal();
-        showToast(`Paramètres Cloud enregistrés pour ${state.settings.aiName}`, 'success');
+        showToast(`Paramètres enregistrés pour ${state.settings.aiName}`, 'success');
       });
 
       let clearArmed = false;
@@ -3392,18 +3566,23 @@ Réponds UNIQUEMENT en JSON valide sans texte autour, sous la forme :
     }
 
     function init() {
-      loadState();
-      bindEvents();
-      initVoiceRecognition();
-      updateBrandIdentity();
-      renderToneSelector();
-      renderStudios();
-      renderEngineStatus();
-      renderThreadsList();
-      renderChat();
+      try { loadState(); } catch (e) {}
+      try { bindEvents(); } catch (e) {}
+      try { initVoiceRecognition(); } catch (e) {}
+      try { updateBrandIdentity(); } catch (e) {}
+      try { renderVoiceCaricatures(); } catch (e) {}
+      try { renderToneSelector(); } catch (e) {}
+      try { renderStudios(); } catch (e) {}
+      try { renderEngineStatus(); } catch (e) {}
+      try { renderThreadsList(); } catch (e) {}
+      try { renderChat(); } catch (e) { renderWelcomeScreen(); }
     }
 
-    window.addEventListener('DOMContentLoaded', init);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   </script>
 </body>
 </html>
