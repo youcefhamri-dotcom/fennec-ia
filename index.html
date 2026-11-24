@@ -2168,8 +2168,8 @@
         try {
           const url = typeof urlBuilder === 'function' ? urlBuilder(getCurrentApiKey()) : urlBuilder;
           const response = await fetch(url, options);
-          if (response.status === 429 || response.status >= 500) {
-            if (response.status === 429) rotateApiKey();
+          if (response.status === 403 || response.status === 429 || response.status >= 500) {
+            if (response.status === 403 || response.status === 429) rotateApiKey();
             if (attempt < maxRetries) {
               await new Promise(r => setTimeout(r, delay));
               delay *= 2;
@@ -2235,7 +2235,11 @@
     }
 
     async function callFennecCoreText(thread, userText, attachment, isVoiceMode = false) {
-      const urlBuilder = (key) => `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${key}`;
+      if (!getCurrentApiKey()) {
+        throw new Error("Aucune clé API configurée. Ouvre ⚙️ Paramètres → Fennec Core et ajoute ta clé API gratuite (aistudio.google.com), ou utilise le moteur Cloud.");
+      }
+      let activeModel = 'gemini-3-flash-preview';
+      const urlBuilder = (key) => `https://generativelanguage.googleapis.com/v1beta/models/${activeModel}:generateContent?key=${key}`;
 
       const aiName = state.settings.aiName || 'Fennec IA';
       const isMale = state.settings.voiceGender === 'male';
@@ -2307,7 +2311,34 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
       }
       clearTimeout(timeoutId);
 
-      if (!response.ok) throw new Error(`Fennec Core rencontre un ralentissement temporaire (${response.status}).`);
+      if (!response.ok && (response.status === 403 || response.status === 404)) {
+        activeModel = 'gemini-2.5-flash';
+        const fallbackRes = await fetchWithBackoff(urlBuilder, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents,
+            systemInstruction: { parts: [{ text: systemPrompt }] },
+            generationConfig: {
+              temperature: 0.55,
+              maxOutputTokens: isVoiceMode ? 120 : 650
+            }
+          })
+        }, 0);
+        if (fallbackRes.ok) response = fallbackRes;
+        else response = fallbackRes;
+      }
+      if (!response.ok) {
+        let errDetail = '';
+        try {
+          const errJson = await response.json();
+          errDetail = errJson?.error?.message || '';
+        } catch (_) {}
+        if (response.status === 401 || response.status === 403) {
+          throw new Error(`Accès API refusé (${response.status}) : vérifie ta clé API dans ⚙️ Paramètres (clé invalide, expirée ou restreinte par domaine).${errDetail ? ' [' + errDetail.slice(0, 120) + ']' : ''}`);
+        }
+        throw new Error(`Fennec Core rencontre un ralentissement temporaire (${response.status}).`);
+      }
       const result = await response.json();
       const reply = result?.candidates?.[0]?.content?.parts?.[0]?.text;
       if (!reply) throw new Error("Fennec n'a pas pu formuler de réponse. Réessaie.");
@@ -2315,6 +2346,9 @@ Date actuelle : ${nowStr} (Heure d'Alger).`;
     }
 
     async function callFennecCoreImage(userPrompt, attachment, overrideRatio = null) {
+      if (!getCurrentApiKey()) {
+        throw new Error("Aucune clé API configurée dans ⚙️ Paramètres pour générer des images.");
+      }
       const urlBuilder = (key) => `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent?key=${key}`;
       const styleObj = IMAGE_STYLES.find(s => s.id === state.imageStyle) || IMAGE_STYLES[0];
       const targetRatio = overrideRatio || state.imageRatio;
